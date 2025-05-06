@@ -14,6 +14,9 @@ enum layers {
     _ADJUST,
 };
 
+enum tap_dance_codes {
+    TD_EQLS
+}
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
@@ -53,7 +56,7 @@ enum layers {
 #define WIN_NXT LALT(KC_TAB)
 #define WIN_SEL LALT(LCTL(KC_TAB))
 
-#define SYM_EQL KC_EQUAL // TODO: convert this to tap dance
+#define SYM_EQL TD(TD_EQLS)
 
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
@@ -276,3 +279,47 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [6] = { ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______)  },
 };
 #endif
+
+
+typedef struct {
+    uint16_t tap;
+    uint16_t hold;
+    uint16_t held;
+} tap_dance_tap_hold_t;
+
+void tap_dance_tap_hold_released(tap_dance_state_t *state, void *user_data) {
+    tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)user_data;
+
+    // if we're "holding" key, do nothing - reset function will release the key
+    // otherwise, perform tap action
+    if(!tap_hold->held) {
+        tap_code16(tap_hold->tap);
+    }
+}
+
+void tap_dance_tap_hold_finished(tap_dance_state_t *state, void *user_data) {
+    tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)user_data;
+
+    // if state is pressed, the tapping term has ended, but the key is still being pressed
+    if (state->pressed) {
+        register_code16(tap_hold->hold);
+        tap_hold->held = tap_hold->hold;
+    }
+}
+
+void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
+    tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)user_data;
+
+    // if we're performing hold action, release held key
+    if (tap_hold->held) {
+        unregister_code16(tap_hold->held);
+        tap_hold->held = 0;
+    }
+}
+
+#define ACTION_TAP_DANCE_TAP_HOLD(tap, hold) \
+    { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset, tap_dance_tap_hold_released}, .user_data = (void *)&((tap_dance_tap_hold_t){tap, hold, 0}), }
+
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_EQLS] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQUAL, KC_CIRCUMFLEX)
+}
