@@ -16,7 +16,7 @@ enum layers {
 
 enum tap_dance_codes {
     TD_EQLS
-}
+};
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
