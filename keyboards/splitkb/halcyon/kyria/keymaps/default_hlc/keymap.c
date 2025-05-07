@@ -15,7 +15,11 @@ enum layers {
 };
 
 enum tap_dance_codes {
-    TD_EQLS
+    TD_EQLS,
+    TD_3_LEFT,
+    TD_5_RIGHT,
+    TD_6_UP,
+    TD_8_DOWN
 };
 
 // Aliases for readability
@@ -42,12 +46,10 @@ enum tap_dance_codes {
 #define MN_ENT LT(_NAV, KC_ENT)
 #define MN_1 MT(MOD_LCTL, KC_1)
 #define MN_2 MT(MOD_LALT, KC_2)
-//#define MN_3 MT(MOD_LCTL, KC_3)
-//#define MN_4 MT(MOD_LCTL, KC_4)
-//#define MN_5 MT(MOD_LCTL, KC_5)
-//#define MN_6 MT(MOD_LCTL, KC_6)
-//#define MN_7 MT(MOD_LCTL, KC_7)
-//#define MN_8 MT(MOD_LCTL, KC_8)
+#define MN_3 TD(TD_3_LEFT)
+#define MN_5 TD(TD_5_RIGHT)
+#define MN_6 TD(TD_6_UP)
+#define MN_8 TD(TD_8_DOWN)
 #define MN_9 MT(MOD_RALT, KC_9)
 #define MN_0 MT(MOD_RCTL, KC_0)
 #define OS_LMIR OSL(_LMIRROR)
@@ -72,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |Ctrl/Esc|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : | Ctrl/' |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |LSft/Z|   X  |   C  |   V  |   B  |  3   |  5   |  |  6   |  8   |   N  |   M  | ,  < | . >  |RSft//| RShift |
+ * | LShift |LSft/Z|   X  |   C  |   V  |   B  | 3/←  | 5/→  |  |  6/↑ |  8/↓ |   N  |   M  | ,  < | . >  |RSft//| RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |  1/  |  2/  |Miror/| Enter|  4   |  |  7   |Space |Miror/|  9/ |  0/  |
  *                        |LCtrl | LAlt | Sym  |      |      |  |      |      | Num  | RAlt| RCtrl|
@@ -84,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_split_3x6_5_hlc(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y  ,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
      CTL_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H  ,   KC_J ,  KC_K ,   KC_L ,KC_SCLN,CTL_QUOT,
-     KC_LSFT , MN_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_3   , KC_5   ,     KC_6   , KC_8  , KC_N  ,   KC_M ,KC_COMM, KC_DOT ,MN_SLSH, KC_RSFT,
+     KC_LSFT , MN_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , MN_3   , MN_5   ,     MN_6   , MN_8  , KC_N  ,   KC_M ,KC_COMM, KC_DOT ,MN_SLSH, KC_RSFT,
                                  MN_1  ,   MN_2 , OS_LMIR, MN_ENT , KC_4   ,     KC_6   , MN_SPC,OS_RMIR,   MN_9 ,  MN_0 ,
      KC_MUTE, KC_NO,  KC_NO, KC_NO, KC_NO,                                                                KC_MUTE, KC_NO, KC_NO, KC_NO, KC_NO
     ),
@@ -97,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |   '    |  ;   |  L   |  K   |  J   |  H   |                              |  !   |  =/^ |  (   |  )   |  $   |   `    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | RShift |RSft//|  .   |  ,   |  M   |  N   |  8   |  6   |  |      |      |  |   |  _   |  {   |  }   |  ~   |        |
+ * | RShift |RSft//|  .   |  ,   |  M   |  N   |  8/↓ |  6/↑ |  |      |      |  |   |  _   |  {   |  }   |  ~   |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |  0/  |  9/  |      |Space |  7   |  |      |      |      |      |      |
  *                        | RCtrl| RAlt |      |      |      |  |      |      |      |      |      |
@@ -109,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LMIRROR] = LAYOUT_split_3x6_5_hlc(
       KC_BSPC,   KC_P ,   KC_O ,   KC_I ,   KC_U ,   KC_Y ,                                         KC_AMPR, KC_HASH, KC_LBRC, KC_RBRC,  KC_AT , KC_ASTR,
       KC_QUOT, KC_SCLN,   KC_L ,   KC_K ,   KC_J ,   KC_H ,                                         KC_EXLM, SYM_EQL, KC_LPRN, KC_RPRN, KC_DLR , KC_GRAVE,
-      KC_RSFT, MN_SLSH,  KC_DOT, KC_COMM,   KC_M ,   KC_N ,   KC_8 ,   KC_6 ,     _______, _______, KC_PIPE, KC_UNDS, KC_LCBR, KC_RCBR, KC_TILD, _______,
+      KC_RSFT, MN_SLSH,  KC_DOT, KC_COMM,   KC_M ,   KC_N ,   MN_8 ,   MN_6 ,     _______, _______, KC_PIPE, KC_UNDS, KC_LCBR, KC_RCBR, KC_TILD, _______,
                                    MN_0 ,   MN_9 , _______,  MN_SPC,   KC_7 ,     _______, _______, _______, _______, _______,
 
       _______, _______, _______, _______, _______,                                                           _______, _______, _______, _______, _______
@@ -123,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |    %   |  4   |  5   |  6   |  0   |  .   |                              |  G   |  F   |  D   |  S   |  A   |  Esc   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  1   |  2   |  3   |  -   |  /   |      |      |  |  5   |  3   |  B   |  V   |  C   |  X   |LSft/Z| LShift |
+ * |        |  1   |  2   |  3   |  -   |  /   |      |      |  |  5/→ |  3/← |  B   |  V   |  C   |  X   |LSft/Z| LShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |  4   |Enter |      |  2/  |  1/  |
  *                        |      |      |      |      |      |  |      |      |      | LAlt | LCtrl|
@@ -135,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RMIRROR] = LAYOUT_split_3x6_5_hlc(
       _______,   KC_7 ,   KC_8 ,   KC_9 , KC_PLUS, KC_ASTR,                                           KC_T ,   KC_R ,   KC_E ,   KC_W ,   KC_Q ,  KC_TAB,
       KC_PERC,   KC_4 ,   KC_5 ,   KC_6 ,   KC_0 , KC_DOT ,                                           KC_G ,   KC_F ,   KC_D ,   KC_S ,   KC_A ,  KC_ESC,
-      _______,   KC_1 ,   KC_2 ,   KC_3 , KC_MINS, KC_SLSH, _______, _______,       KC_5 ,   KC_3 ,   KC_B ,   KC_V ,   KC_C ,   KC_X ,   MN_Z , KC_LSFT,
+      _______,   KC_1 ,   KC_2 ,   KC_3 , KC_MINS, KC_SLSH, _______, _______,       MN_5 ,   MN_3 ,   KC_B ,   KC_V ,   KC_C ,   KC_X ,   MN_Z , KC_LSFT,
                                  _______, _______, _______, _______, _______,       KC_4 ,  MN_ENT, _______,   MN_2 ,   MN_1 ,
 
       _______, _______, _______, _______, _______,                                                       _______, _______, _______, _______, _______
@@ -321,5 +323,9 @@ void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
     { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset, tap_dance_tap_hold_released}, .user_data = (void *)&((tap_dance_tap_hold_t){tap, hold, 0}), }
 
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_EQLS] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQUAL, KC_CIRCUMFLEX)
+    [TD_EQLS] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQUAL, KC_CIRCUMFLEX),
+    [TD_3_LEFT] = ACTION_TAP_DANCE_TAP_HOLD(KC_3, KC_LEFT),
+    [TD_5_RIGHT] = ACTION_TAP_DANCE_TAP_HOLD(KC_5, KC_RIGHT),
+    [TD_6_UP] = ACTION_TAP_DANCE_TAP_HOLD(KC_6, KC_UP),
+    [TD_8_DOWN] = ACTION_TAP_DANCE_TAP_HOLD(KC_8, KC_DOWN),
 };
