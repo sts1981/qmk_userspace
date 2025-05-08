@@ -30,10 +30,10 @@ enum tap_dance_codes {
 #define FKEYS    MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
 
-#define CTL_ESC  MT(MOD_LCTL, KC_ESC)
-#define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
-#define CTL_MINS MT(MOD_RCTL, KC_MINUS)
-#define ALT_ENT  MT(MOD_LALT, KC_ENT)
+//#define CTL_ESC  MT(MOD_LCTL, KC_ESC)
+//#define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
+//#define CTL_MINS MT(MOD_RCTL, KC_MINUS)
+//#define ALT_ENT  MT(MOD_LALT, KC_ENT)
 
 #define OSM_LALT OSM(MOD_LALT)
 #define OSM_LCTL OSM(MOD_LCTL)
@@ -44,6 +44,8 @@ enum tap_dance_codes {
 #define MN_SLSH MT(MOD_RSFT, KC_SLASH)
 #define MN_SPC LT(_NAV, KC_SPACE)
 #define MN_ENT LT(_NAV, KC_ENT)
+#define MN_ESC LGUI_T(KC_ESC) // TODO: replace these with Sway layer?
+#define MN_QUOT RGUI_T(KC_QUOTE)
 #define MN_1 MT(MOD_LCTL, KC_1)
 #define MN_2 MT(MOD_LALT, KC_2)
 #define MN_3 TD(TD_3_LEFT)
@@ -72,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |  Tab   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  Bksp  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/Esc|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : | Ctrl/' |
+ * |Meta/Esc|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : | Meta/' |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LShift |LSft/Z|   X  |   C  |   V  |   B  | 3/←  | 5/→  |  |  6/↑ |  8/↓ |   N  |   M  | ,  < | . >  |RSft//| RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -85,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT_split_3x6_5_hlc(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y  ,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
-     CTL_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H  ,   KC_J ,  KC_K ,   KC_L ,KC_SCLN,CTL_QUOT,
+      MN_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H  ,   KC_J ,  KC_K ,   KC_L ,KC_SCLN, MN_QUOT,
      KC_LSFT , MN_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , MN_3   , MN_5   ,     MN_6   , MN_8  , KC_N  ,   KC_M ,KC_COMM, KC_DOT ,MN_SLSH, KC_RSFT,
                                  MN_1  ,   MN_2 , OS_LMIR, MN_ENT , KC_4   ,     KC_6   , MN_SPC,OS_RMIR,   MN_9 ,  MN_0 ,
      KC_MUTE, KC_NO,  KC_NO, KC_NO, KC_NO,                                                                KC_MUTE, KC_NO, KC_NO, KC_NO, KC_NO
