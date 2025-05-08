@@ -162,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   */
      [_MOUSE] = LAYOUT_split_3x6_5_hlc(
         KC_F11,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 ,  KC_F5 ,                                            KC_F6 ,  KC_F7 ,  KC_F8 ,  KC_F9 ,  KC_F10,  KC_F12,
-       _______, _______,MS_RIGHT,  MS_UP , MS_DOWN, MS_LEFT,                                           MS_LEFT, MS_DOWN,  MS_UP ,MS_RIGHT, _______, _______,
+       _______, _______, MS_RGHT,  MS_UP , MS_DOWN, MS_LEFT,                                           MS_LEFT, MS_DOWN,  MS_UP , MS_RGHT, _______, _______,
        _______, MS_BTN1, _______, MS_WHLU, MS_WHLD, _______, _______, _______,       _______, _______, _______, MS_WHLD, MS_WHLU, _______, MS_BTN1, _______,
                                   _______, _______, _______, MS_BTN1, MS_BTN2,       MS_BTN2, MS_BTN1, _______, _______, _______,
 
