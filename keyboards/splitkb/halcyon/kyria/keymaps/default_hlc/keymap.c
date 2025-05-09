@@ -25,10 +25,11 @@ enum tap_dance_codes {
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
 
-#define SYM      MO(_SYM)
-#define NAV      MO(_NAV)
-#define FKEYS    MO(_FUNCTION)
-#define ADJUST   MO(_ADJUST)
+#define MAIN     TO(_QWERTY)
+//#define SYM      MO(_SYM)
+//#define NAV      MO(_NAV)
+//#define FKEYS    MO(_FUNCTION)
+#define ADJUST   TO(_ADJUST)
 
 //#define CTL_ESC  MT(MOD_LCTL, KC_ESC)
 //#define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
@@ -175,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Navigation, other frequently used keys
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      | LCtrl| LAlt | BkSpc|      |                              |CpsWrd| Del  | RAlt | RCtrl|      | PrtSc  |
+ * | ADJUST |      | LCtrl| LAlt | BkSpc|PrtSc |                              |CpsWrd| Del  | RAlt | RCtrl|      | ADJUST |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |AlCtTb|   →  |  ↑   |   ↓  |  ←   |                              |   ←  |  ↓   |   ↑  |   →  |AlCtTb|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -189,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_NAV] = LAYOUT_split_3x6_5_hlc(
-      _______, _______,OSM_LCTL,OSM_LALT, KC_BSPC, _______,                                     CW_TOGG, KC_DEL ,OSM_RALT,OSM_RCTL, _______, KC_PSCR,
+      ADJUST , _______,OSM_LCTL,OSM_LALT, KC_BSPC, KC_PSCR,                                     CW_TOGG, KC_DEL ,OSM_RALT,OSM_RCTL, _______, ADJUST ,
       _______, WIN_SEL, KC_RGHT, KC_UP  , KC_DOWN, KC_LEFT,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, WIN_SEL, _______,
       _______, WIN_NXT, _______, KC_PGUP, KC_PGDN, _______, _______, _______, _______, _______, _______, KC_PGDN, KC_PGUP, _______, WIN_NXT, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -250,11 +251,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Adjust Layer: Default layer settings, RGB
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * | Boot   |      |      |QWERTY|      |      |                              |      |      |      |      |      | Boot   |
+ * |        |      |      |QWERTY|      |      |                              |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
+ * | MAIN   |      |      |      |      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
+ * |        |      |      |      |      |      |      | Boot |  | Boot |      |      | SAD  | HUD  | VAD  | RMOD |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -264,11 +265,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_ADJUST] = LAYOUT_split_3x6_5_hlc(
-      QK_BOOT, _______, _______, QWERTY , _______, _______,                                    _______, _______, _______, _______, _______, QK_BOOT,
-      _______, _______, _______, _______, _______, _______,                                    RM_TOGG, RM_SATU, RM_HUEU, RM_VALU, RM_NEXT, _______,
-      _______, _______, _______, _______, _______, _______,_______, _______, _______, _______, _______, RM_SATD, RM_HUED, RM_VALD, RM_PREV, _______,
-                                 _______, _______, _______,_______, _______, _______, _______, _______, _______, _______,
-     _______, _______,  _______, _______, _______,                                                      _______, _______, _______, _______, _______
+      _______, _______, _______, QWERTY , _______, _______,                                             _______, _______, _______, _______, _______, _______,
+        MAIN , _______, _______, _______, _______, _______,                                             RM_TOGG, RM_SATU, RM_HUEU, RM_VALU, RM_NEXT, _______,
+      _______, _______, _______, _______, _______, _______, QK_BOOT,         QK_BOOT, _______, _______, _______, RM_SATD, RM_HUED, RM_VALD, RM_PREV, _______,
+                                 _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______,
+     _______, _______,  _______, _______, _______,                                                               _______, _______, _______, _______, _______
     ),
 
 // /*
