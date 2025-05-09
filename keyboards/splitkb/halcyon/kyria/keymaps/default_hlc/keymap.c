@@ -312,7 +312,7 @@ combo_t key_combos[] = {
     COMBO(combo_rmeta, OSM(MOD_RGUI)),
     COMBO(combo_lsway, LM(_SWAY, MOD_LGUI)),
     COMBO(combo_rsway, LM(_SWAY, MOD_RGUI)),
-};)
+};
 
 typedef struct {
     uint16_t tap;
