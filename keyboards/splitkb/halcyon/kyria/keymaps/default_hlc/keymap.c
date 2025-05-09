@@ -235,11 +235,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Adjust Layer: Default layer settings, RGB
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |QWERTY|      |      |                              |      |      |      |      |      |        |
+ * |        |      |      |QWERTY|TermUp|      |                              |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * | MAIN   |      |      |      |      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
+ * | MAIN   |      |      |      |TermPt|      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      | Boot |  | Boot |      |      | SAD  | HUD  | VAD  | RMOD |        |
+ * |        |      |      |      |TermDn|      |      | Boot |  | Boot |      |      | SAD  | HUD  | VAD  | RMOD |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -249,9 +249,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_ADJUST] = LAYOUT_split_3x6_5_hlc(
-      _______, _______, _______, QWERTY , _______, _______,                                             _______, _______, _______, _______, _______, _______,
-        MAIN , _______, _______, _______, _______, _______,                                             RM_TOGG, RM_SATU, RM_HUEU, RM_VALU, RM_NEXT, _______,
-      _______, _______, _______, _______, _______, _______, QK_BOOT,         QK_BOOT, _______, _______, _______, RM_SATD, RM_HUED, RM_VALD, RM_PREV, _______,
+      _______, _______, _______, QWERTY ,  DT_UP , _______,                                             _______, _______, _______, _______, _______, _______,
+        MAIN , _______, _______, _______, DT_PRNT, _______,                                             RM_TOGG, RM_SATU, RM_HUEU, RM_VALU, RM_NEXT, _______,
+      _______, _______, _______, _______, DT_DOWN, _______, QK_BOOT,         QK_BOOT, _______, _______, _______, RM_SATD, RM_HUED, RM_VALD, RM_PREV, _______,
                                  _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______,
      _______, _______,  _______, _______, _______,                                                               _______, _______, _______, _______, _______
     ),
@@ -366,3 +366,18 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_4_7] = ACTION_TAP_DANCE_TAP_HOLD(KC_4, KC_7),
     [TD_5_6] = ACTION_TAP_DANCE_TAP_HOLD(KC_5, KC_6),
 };
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MN_Z:
+            return TAPPING_TERM - 25;
+        case MN_SLSH:
+            return TAPPING_TERM - 25;
+        case MN_ESC:
+            return TAPPING_TERM + 50;
+        case MN_QUOT:
+            return TAPPING_TERM + 50;
+        default:
+            return TAPPING_TERM;
+    }
+}
