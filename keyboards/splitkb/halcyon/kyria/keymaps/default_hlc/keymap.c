@@ -312,6 +312,17 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
+const uint16_t PROGMEM combo_lctl[] = { KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM combo_rctl[] = { KC_DOT, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM combo_lalt[] = { KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM combo_ralt[] = { KC_M, KC_COMMA, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(combo_lctl, KC_LCTL),
+    COMBO(combo_rctl, KC_RCTL),
+    COMBO(combo_lalt, KC_LALT),
+    COMBO(combo_ralt, KC_RALT),
+};
 
 typedef struct {
     uint16_t tap;
