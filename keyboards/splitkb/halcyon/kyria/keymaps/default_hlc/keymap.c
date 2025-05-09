@@ -110,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | Meta/' |  ;   |  L   |  K   |  J   |  H   |                              |  !   |  =/^ |  (   |  )   |  $   |   `    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | RShift |RSft//|  .   |  ,   |  M   |  N   |  8/↓ |  6/↑ |  |      |      |  |   |  _   |  {   |  }   |  ~   |        |
+ * | RShift |RSft//|  .   |  ,   |  M   |  N   |  8/↓ |  6/↑ |  |      | MAIN |  |   |  _   |  {   |  }   |  ~   |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |  0/  |  9/  |      |Space |  7   |  |      |      |      |      |      |
  *                        | RCtrl| RAlt |      |      |      |  |      |      |      |      |      |
@@ -122,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LMIRROR] = LAYOUT_split_3x6_5_hlc(
       KC_BSPC,   KC_P ,   KC_O ,   KC_I ,   KC_U ,   KC_Y ,                                         KC_AMPR, KC_HASH, KC_LBRC, KC_RBRC,  KC_AT , KC_BSLS,
       MN_QUOT, KC_SCLN,   KC_L ,   KC_K ,   KC_J ,   KC_H ,                                         KC_EXLM, SYM_EQL, KC_LPRN, KC_RPRN, KC_DLR , KC_GRAVE,
-      KC_RSFT, MN_SLSH,  KC_DOT, KC_COMM,   KC_M ,   KC_N ,   MN_8 ,   MN_6 ,     _______, _______, KC_PIPE, KC_UNDS, KC_LCBR, KC_RCBR, KC_TILD, _______,
+      KC_RSFT, MN_SLSH,  KC_DOT, KC_COMM,   KC_M ,   KC_N ,   MN_8 ,   MN_6 ,     _______,   MAIN , KC_PIPE, KC_UNDS, KC_LCBR, KC_RCBR, KC_TILD, _______,
                                    MN_0 ,   MN_9 , _______,  MN_SPC,   KC_7 ,     _______, _______, _______, _______, _______,
 
       _______, _______, _______, _______, _______,                                                           _______, _______, _______, _______, _______
@@ -136,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |    %   |  4   |  5   |  6   |  0   |  .   |                              |  G   |  F   |  D   |  S   |  A   |Meta/Esc|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  1   |  2   |  3   |  -   |  /   |      |      |  |  5/→ |  3/← |  B   |  V   |  C   |  X   |LSft/Z| LShift |
+ * |        |  1   |  2   |  3   |  -   |  /   | MAIN |      |  |  5/→ |  3/← |  B   |  V   |  C   |  X   |LSft/Z| LShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |  4   |Enter |      |  2/  |  1/  |
  *                        |      |      |      |      |      |  |      |      |      | LAlt | LCtrl|
@@ -148,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RMIRROR] = LAYOUT_split_3x6_5_hlc(
       _______,   KC_7 ,   KC_8 ,   KC_9 , KC_PLUS, KC_ASTR,                                           KC_T ,   KC_R ,   KC_E ,   KC_W ,   KC_Q ,  KC_TAB,
       KC_PERC,   KC_4 ,   KC_5 ,   KC_6 ,   KC_0 , KC_DOT ,                                           KC_G ,   KC_F ,   KC_D ,   KC_S ,   KC_A ,  MN_ESC,
-      _______,   KC_1 ,   KC_2 ,   KC_3 , KC_MINS, KC_SLSH, _______, _______,       MN_5 ,   MN_3 ,   KC_B ,   KC_V ,   KC_C ,   KC_X ,   MN_Z , KC_LSFT,
+      _______,   KC_1 ,   KC_2 ,   KC_3 , KC_MINS, KC_SLSH,   MAIN , _______,       MN_5 ,   MN_3 ,   KC_B ,   KC_V ,   KC_C ,   KC_X ,   MN_Z , KC_LSFT,
                                  _______, _______, _______, _______, _______,       KC_4 ,  MN_ENT, _______,   MN_2 ,   MN_1 ,
 
       _______, _______, _______, _______, _______,                                                       _______, _______, _______, _______, _______
@@ -160,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,-------------------------------------------.                              ,-------------------------------------------.
   * |  F11   |  F1  |  F2  |  F3  |  F4  |  F5  |                              |  F6  |  F7  |  F8  |  F9  |  F10 |  F12   |
   * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-  * |        |      |MouseR|MouseU|MouseD|MouseL|                              |MouseL|MouseD|MouseU|MouseR|      |        |
+  * |  MAIN  |      |MouseR|MouseU|MouseD|MouseL|                              |MouseL|MouseD|MouseU|MouseR|      |        |
   * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
   * |        |Click |      |WheelU|WheelD|      |      |      |  |      |      |      |WheelD|WheelU|      |Click |        |
   * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -173,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   */
      [_MOUSE] = LAYOUT_split_3x6_5_hlc(
         KC_F11,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 ,  KC_F5 ,                                            KC_F6 ,  KC_F7 ,  KC_F8 ,  KC_F9 ,  KC_F10,  KC_F12,
-       _______, _______, MS_RGHT,  MS_UP , MS_DOWN, MS_LEFT,                                           MS_LEFT, MS_DOWN,  MS_UP , MS_RGHT, _______, _______,
+         MAIN , _______, MS_RGHT,  MS_UP , MS_DOWN, MS_LEFT,                                           MS_LEFT, MS_DOWN,  MS_UP , MS_RGHT, _______, _______,
        _______, MS_BTN1, _______, MS_WHLU, MS_WHLD, _______, _______, _______,       _______, _______, _______, MS_WHLD, MS_WHLU, _______, MS_BTN1, _______,
                                   _______, _______, _______, MS_BTN1, MS_BTN2,       MS_BTN2, MS_BTN1, _______, _______, _______,
 
@@ -186,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * | ADJUST |      | LCtrl| LAlt | BkSpc|PrtSc |                              |CpsWrd| Del  | RAlt | RCtrl|      | ADJUST |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |AlCtTb|   →  |  ↑   |   ↓  |  ←   |                              |   ←  |  ↓   |   ↑  |   →  |AlCtTb|        |
+ * | MAIN   |AlCtTb|   →  |  ↑   |   ↓  |  ←   |                              |   ←  |  ↓   |   ↑  |   →  |AlCtTb|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |AltTab|      | PgUp | PgDn |      |      |      |  |      |      |      | PgDn | PgUp |      |AltTab|        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -199,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_NAV] = LAYOUT_split_3x6_5_hlc(
       ADJUST , _______,OSM_LCTL,OSM_LALT, KC_BSPC, KC_PSCR,                                     CW_TOGG, KC_DEL ,OSM_RALT,OSM_RCTL, _______, ADJUST ,
-      _______, WIN_SEL, KC_RGHT, KC_UP  , KC_DOWN, KC_LEFT,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, WIN_SEL, _______,
+        MAIN , WIN_SEL, KC_RGHT, KC_UP  , KC_DOWN, KC_LEFT,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, WIN_SEL, _______,
       _______, WIN_NXT, _______, KC_PGUP, KC_PGDN, _______, _______, _______, _______, _______, _______, KC_PGDN, KC_PGUP, _______, WIN_NXT, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
      _______, _______,  _______, _______, _______,                                                       _______, _______, _______, _______, _______
@@ -211,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,-------------------------------------------.                              ,-------------------------------------------.
   * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
   * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-  * |        |      |   L  |  K   |  J   |  H   |                              |  H   |  J   |  K   |  L   |      |        |
+  * |  MAIN  |      |   L  |  K   |  J   |  H   |                              |  H   |  J   |  K   |  L   |      |        |
   * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
   * |        | 1/0  | 2/9  | 3/8  | 4/7  | 5/6  |      |      |  |      |      | 5/6  | 4/7  | 3/8  | 2/9  | 1/0  |        |
   * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -224,7 +224,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   */
      [_SWAY] = LAYOUT_split_3x6_5_hlc(
        _______, _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______, _______,
-       _______, _______,  KC_L  ,   KC_K ,   KC_J ,   KC_H ,                                               KC_H ,   KC_J ,   KC_K ,   KC_L , _______, _______,
+         MAIN , _______,  KC_L  ,   KC_K ,   KC_J ,   KC_H ,                                               KC_H ,   KC_J ,   KC_K ,   KC_L , _______, _______,
        _______,  TH_1_0,  TH_2_9,  TH_3_8,  TH_4_7,  TH_5_6, _______, _______,         _______, _______,  TH_5_6,  TH_4_7,  TH_3_8,  TH_2_9,  TH_1_0, _______,
                                   _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______,
 
@@ -303,6 +303,8 @@ const uint16_t PROGMEM combo_lmeta[] = { MN_Z, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_rmeta[] = { KC_M, MN_SLSH, COMBO_END};
 const uint16_t PROGMEM combo_lsway[] = { KC_4, MN_5, COMBO_END};
 const uint16_t PROGMEM combo_rsway[] = { KC_7, MN_6, COMBO_END};
+const uint16_t PROGMEM combo_lmouse[] = { MN_ENT, MN_3, COMBO_END};
+const uint16_t PROGMEM combo_rmouse[] = { MN_SPACE, MN_8, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_lctl, KC_LCTL),
@@ -313,6 +315,8 @@ combo_t key_combos[] = {
     COMBO(combo_rmeta, OSM(MOD_RGUI)),
     COMBO(combo_lsway, LM(_SWAY, MOD_LGUI)),
     COMBO(combo_rsway, LM(_SWAY, MOD_RGUI)),
+    COMBO(combo_lmouse, MO(_MOUSE)),
+    COMBO(combo_rmouse, MO(_MOUSE)),
 };
 
 typedef struct {
