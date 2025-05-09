@@ -308,7 +308,7 @@ combo_t key_combos[] = {
     COMBO(combo_rctl, KC_RCTL),
     COMBO(combo_lalt, KC_LALT),
     COMBO(combo_ralt, KC_RALT),
-    COMBO(combo_lmeta, OSM(MOD_LGUI),
+    COMBO(combo_lmeta, OSM(MOD_LGUI)),
     COMBO(combo_rmeta, OSM(MOD_RGUI)),
     COMBO(combo_lsway, LM(_SWAY, MOD_LGUI)),
     COMBO(combo_rsway, LM(_SWAY, MOD_RGUI)),
