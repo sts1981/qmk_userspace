@@ -304,7 +304,7 @@ const uint16_t PROGMEM combo_rmeta[] = { KC_M, MN_SLSH, COMBO_END};
 const uint16_t PROGMEM combo_lsway[] = { KC_4, MN_5, COMBO_END};
 const uint16_t PROGMEM combo_rsway[] = { KC_7, MN_6, COMBO_END};
 const uint16_t PROGMEM combo_lmouse[] = { MN_ENT, MN_3, COMBO_END};
-const uint16_t PROGMEM combo_rmouse[] = { MN_SPACE, MN_8, COMBO_END};
+const uint16_t PROGMEM combo_rmouse[] = { MN_SPC, MN_8, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_lctl, KC_LCTL),
@@ -315,8 +315,8 @@ combo_t key_combos[] = {
     COMBO(combo_rmeta, OSM(MOD_RGUI)),
     COMBO(combo_lsway, LM(_SWAY, MOD_LGUI)),
     COMBO(combo_rsway, LM(_SWAY, MOD_RGUI)),
-    COMBO(combo_lmouse, MO(_MOUSE)),
-    COMBO(combo_rmouse, MO(_MOUSE)),
+    COMBO(combo_lmouse, TT(_MOUSE)),
+    COMBO(combo_rmouse, TT(_MOUSE)),
 };
 
 typedef struct {
