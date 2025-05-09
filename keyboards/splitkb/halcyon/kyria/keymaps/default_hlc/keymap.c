@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y  ,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
       MN_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H  ,   KC_J ,  KC_K ,   KC_L ,KC_SCLN, MN_QUOT,
      KC_LSFT , MN_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , MN_3   , MN_5   ,     MN_6   , MN_8  , KC_N  ,   KC_M ,KC_COMM, KC_DOT ,MN_SLSH, KC_RSFT,
-                                 MN_1  ,   MN_2 , OS_LMIR, MN_ENT , KC_4   ,     KC_6   , MN_SPC,OS_RMIR,   MN_9 ,  MN_0 ,
+                                 MN_1  ,   MN_2 , OS_LMIR, MN_ENT , KC_4   ,     KC_7   , MN_SPC,OS_RMIR,   MN_9 ,  MN_0 ,
      KC_MUTE, KC_NO,  KC_NO, KC_NO, KC_NO,                                                                KC_MUTE, KC_NO, KC_NO, KC_NO, KC_NO
     ),
 
@@ -94,9 +94,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * LMirror: Symbols on RH, mirror on LH
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Bksp  |  P   |   O  |  I   |   U  |  Y   |                              |  &   |  #   |  [   |  ]   |  @   |   *    |
+ * |  Bksp  |  P   |   O  |  I   |   U  |  Y   |                              |  &   |  #   |  [   |  ]   |  @   |   \    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |   '    |  ;   |  L   |  K   |  J   |  H   |                              |  !   |  =/^ |  (   |  )   |  $   |   `    |
+ * | Meta/' |  ;   |  L   |  K   |  J   |  H   |                              |  !   |  =/^ |  (   |  )   |  $   |   `    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | RShift |RSft//|  .   |  ,   |  M   |  N   |  8/↓ |  6/↑ |  |      |      |  |   |  _   |  {   |  }   |  ~   |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -108,8 +108,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_LMIRROR] = LAYOUT_split_3x6_5_hlc(
-      KC_BSPC,   KC_P ,   KC_O ,   KC_I ,   KC_U ,   KC_Y ,                                         KC_AMPR, KC_HASH, KC_LBRC, KC_RBRC,  KC_AT , KC_ASTR,
-      KC_QUOT, KC_SCLN,   KC_L ,   KC_K ,   KC_J ,   KC_H ,                                         KC_EXLM, SYM_EQL, KC_LPRN, KC_RPRN, KC_DLR , KC_GRAVE,
+      KC_BSPC,   KC_P ,   KC_O ,   KC_I ,   KC_U ,   KC_Y ,                                         KC_AMPR, KC_HASH, KC_LBRC, KC_RBRC,  KC_AT , KC_BSLS,
+      MN_QUOT, KC_SCLN,   KC_L ,   KC_K ,   KC_J ,   KC_H ,                                         KC_EXLM, SYM_EQL, KC_LPRN, KC_RPRN, KC_DLR , KC_GRAVE,
       KC_RSFT, MN_SLSH,  KC_DOT, KC_COMM,   KC_M ,   KC_N ,   MN_8 ,   MN_6 ,     _______, _______, KC_PIPE, KC_UNDS, KC_LCBR, KC_RCBR, KC_TILD, _______,
                                    MN_0 ,   MN_9 , _______,  MN_SPC,   KC_7 ,     _______, _______, _______, _______, _______,
 
@@ -122,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |  7   |  8   |  9   |  +   |  *   |                              |  T   |  R   |  E   |  W   |  Q   |  Tab   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |    %   |  4   |  5   |  6   |  0   |  .   |                              |  G   |  F   |  D   |  S   |  A   |  Esc   |
+ * |    %   |  4   |  5   |  6   |  0   |  .   |                              |  G   |  F   |  D   |  S   |  A   |Meta/Esc|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |  1   |  2   |  3   |  -   |  /   |      |      |  |  5/→ |  3/← |  B   |  V   |  C   |  X   |LSft/Z| LShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -135,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_RMIRROR] = LAYOUT_split_3x6_5_hlc(
       _______,   KC_7 ,   KC_8 ,   KC_9 , KC_PLUS, KC_ASTR,                                           KC_T ,   KC_R ,   KC_E ,   KC_W ,   KC_Q ,  KC_TAB,
-      KC_PERC,   KC_4 ,   KC_5 ,   KC_6 ,   KC_0 , KC_DOT ,                                           KC_G ,   KC_F ,   KC_D ,   KC_S ,   KC_A ,  KC_ESC,
+      KC_PERC,   KC_4 ,   KC_5 ,   KC_6 ,   KC_0 , KC_DOT ,                                           KC_G ,   KC_F ,   KC_D ,   KC_S ,   KC_A ,  MN_ESC,
       _______,   KC_1 ,   KC_2 ,   KC_3 , KC_MINS, KC_SLSH, _______, _______,       MN_5 ,   MN_3 ,   KC_B ,   KC_V ,   KC_C ,   KC_X ,   MN_Z , KC_LSFT,
                                  _______, _______, _______, _______, _______,       KC_4 ,  MN_ENT, _______,   MN_2 ,   MN_1 ,
 
