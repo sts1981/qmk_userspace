@@ -9,6 +9,7 @@ enum layers {
     _RMIRROR,
     _MOUSE,
     _NAV,
+    _SWAY,
     _ADJUST,
 };
 
@@ -17,7 +18,12 @@ enum tap_dance_codes {
     TD_3_LEFT,
     TD_5_RIGHT,
     TD_6_UP,
-    TD_8_DOWN
+    TD_8_DOWN,
+    TD_1_0,
+    TD_2_9,
+    TD_3_8,
+    TD_4_7,
+    TD_5_6
 };
 
 // Aliases for readability
@@ -58,6 +64,12 @@ enum tap_dance_codes {
 #define WIN_SEL LALT(LCTL(KC_TAB))
 
 #define SYM_EQL TD(TD_EQLS)
+
+#define TH_1_0 TD(TD_1_0)
+#define TH_2_9 TD(TD_2_9)
+#define TH_3_8 TD(TD_3_8)
+#define TH_4_7 TD(TD_4_7)
+#define TH_5_6 TD(TD_5_6)
 
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
@@ -193,6 +205,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, _______,  _______, _______, _______,                                                       _______, _______, _______, _______, _______
     ),
 
+ /*
+  * Sway: window switching/navigation, should be reached with Meta modifier on
+  *
+  * ,-------------------------------------------.                              ,-------------------------------------------.
+  * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+  * |        |      |   L  |  K   |  J   |  H   |                              |  H   |  J   |  K   |  L   |      |        |
+  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+  * |        | 1/0  | 2/9  | 3/8  | 4/7  | 5/6  |      |      |  |      |      | 5/6  | 4/7  | 3/8  | 2/9  | 1/0  |        |
+  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+  *                        |      |      |      |      |      |  |      |      |      |      |      |
+  *                        |      |      |      |      |      |  |      |      |      |      |      |
+  *                        `----------------------------------'  `----------------------------------'
+  * ,-----------------------------------.                                              ,-----------------------------------.
+  * |      |      |       |      |      |                                              |      |      |       |      |      |
+  * `-----------------------------------'                                              `-----------------------------------'
+  */
+     [_SWAY] = LAYOUT_split_3x6_5_hlc(
+       _______, _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______, _______,
+       _______, _______,  KC_L  ,   KC_K ,   KC_J ,   KC_H ,                                               KC_H ,   KC_J ,   KC_K ,   KC_L , _______, _______,
+       _______,  TH_1_0,  TH_2_9,  TH_3_8,  TH_4_7,  TH_5_6, _______, _______,         _______, _______,  TH_5_6,  TH_4_7,  TH_3_8,  TH_2_9,  TH_1_0, _______,
+                                  _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______,
+
+       _______, _______, _______, _______, _______,                                                               _______, _______, _______, _______, _______
+     ),
+
 /*
  * Adjust Layer: Default layer settings, RGB
  *
@@ -260,13 +298,21 @@ const uint16_t PROGMEM combo_lctl[] = { KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM combo_rctl[] = { KC_DOT, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM combo_lalt[] = { KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_ralt[] = { KC_M, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM combo_lmeta[] = { MN_Z, KC_V, COMBO_END};
+const uint16_t PROGMEM combo_rmeta[] = { KC_M, MN_SLSH, COMBO_END};
+const uint16_t PROGMEM combo_lsway[] = { KC_4, MN_5, COMBO_END};
+const uint16_t PROGMEM combo_rsway[] = { KC_7, MN_6, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_lctl, KC_LCTL),
     COMBO(combo_rctl, KC_RCTL),
     COMBO(combo_lalt, KC_LALT),
     COMBO(combo_ralt, KC_RALT),
-};
+    COMBO(combo_lmeta, OSM(MOD_LGUI),
+    COMBO(combo_rmeta, OSM(MOD_RGUI)),
+    COMBO(combo_lsway, LM(_SWAY, MOD_LGUI)),
+    COMBO(combo_rsway, LM(_SWAY, MOD_RGUI)),
+};)
 
 typedef struct {
     uint16_t tap;
@@ -313,4 +359,9 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_5_RIGHT] = ACTION_TAP_DANCE_TAP_HOLD(KC_5, KC_RIGHT),
     [TD_6_UP] = ACTION_TAP_DANCE_TAP_HOLD(KC_6, KC_UP),
     [TD_8_DOWN] = ACTION_TAP_DANCE_TAP_HOLD(KC_8, KC_DOWN),
+    [TD_1_0] = ACTION_TAP_DANCE_TAP_HOLD(KC_1, KC_0),
+    [TD_2_9] = ACTION_TAP_DANCE_TAP_HOLD(KC_2, KC_9),
+    [TD_3_8] = ACTION_TAP_DANCE_TAP_HOLD(KC_3, KC_8),
+    [TD_4_7] = ACTION_TAP_DANCE_TAP_HOLD(KC_4, KC_7),
+    [TD_5_6] = ACTION_TAP_DANCE_TAP_HOLD(KC_5, KC_6),
 };
