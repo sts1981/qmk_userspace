@@ -375,15 +375,11 @@ tap_dance_action_t tap_dance_actions[] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MN_Z:
-            return TAPPING_TERM - 25;
-        case MN_SLSH:
-            return TAPPING_TERM - 25;
         case MN_ESC:
-            return TAPPING_TERM + 50;
+            return g_tapping_term + 50;
         case MN_QUOT:
-            return TAPPING_TERM + 50;
+            return g_tapping_term + 50;
         default:
-            return TAPPING_TERM;
+            return g_tapping_term;
     }
 }
