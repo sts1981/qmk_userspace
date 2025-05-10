@@ -52,8 +52,10 @@ enum tap_dance_codes {
 #define MN_1 MT(MOD_LCTL, KC_1)
 #define MN_2 MT(MOD_LALT, KC_2)
 #define MN_3 TD(TD_3_LEFT)
+#define MN_4 LT(_SWAY, KC_4)
 #define MN_5 TD(TD_5_RIGHT)
 #define MN_6 TD(TD_6_DOWN)
+#define MN_7 LT(_SWAY, KC_7)
 #define MN_8 TD(TD_8_UP)
 #define MN_9 MT(MOD_RALT, KC_9)
 #define MN_0 MT(MOD_RCTL, KC_0)
@@ -87,8 +89,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LShift |LSft/Z|   X  |   C  |   V  |   B  | 3/←  | 5/→  |  |  6/↑ |  8/↓ |   N  |   M  | ,  < | . >  |RSft//| RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |  1/  |  2/  |Miror/| Enter|  4   |  |  7   |Space |Miror/|  9/ |  0/  |
- *                        |LCtrl | LAlt | Sym  |      |      |  |      |      | Num  | RAlt| RCtrl|
+ *                        |  1/  |  2/  |Miror/| Enter|  4/  |  |  7/  |Space |Miror/|  9/ |  0/  |
+ *                        |LCtrl | LAlt | Sym  |      | Sway |  | Sway |      | Num  | RAlt| RCtrl|
  *                        `----------------------------------'  `----------------------------------'
  * ,-----------------------------------.                                              ,-----------------------------------.
  * | MUTE | ____ | _____ | ____ | ____ |                                              | MUTE | ____ | _____ | ____ | ____ |
@@ -98,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y  ,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
       MN_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H  ,   KC_J ,  KC_K ,   KC_L ,KC_SCLN, MN_QUOT,
      KC_LSFT , MN_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , MN_3   , MN_5   ,     MN_6   , MN_8  , KC_N  ,   KC_M ,KC_COMM, KC_DOT ,MN_SLSH, KC_RSFT,
-                                 MN_1  ,   MN_2 , OS_LMIR, MN_ENT , KC_4   ,     KC_7   , MN_SPC,OS_RMIR,   MN_9 ,  MN_0 ,
+                                 MN_1  ,   MN_2 , OS_LMIR, MN_ENT , MN_4   ,     MN_7   , MN_SPC,OS_RMIR,   MN_9 ,  MN_0 ,
      KC_MUTE, KC_NO,  KC_NO, KC_NO, KC_NO,                                                                KC_MUTE, KC_NO, KC_NO, KC_NO, KC_NO
     ),
 
@@ -112,8 +114,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | RShift |RSft//|  .   |  ,   |  M   |  N   |  8/↓ |  6/↑ |  |      | MAIN |  |   |  _   |  {   |  }   |  ~   |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |  0/  |  9/  |      |Space |  7   |  |      |      |      |      |      |
- *                        | RCtrl| RAlt |      |      |      |  |      |      |      |      |      |
+ *                        |  0/  |  9/  |      |Space |  7/  |  |      |      |      |      |      |
+ *                        | RCtrl| RAlt |      |      | Sway |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  * ,-----------------------------------.                                              ,-----------------------------------.
  * |      |      |       |      |      |                                              |      |      |       |      |      |
@@ -123,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_BSPC,   KC_P ,   KC_O ,   KC_I ,   KC_U ,   KC_Y ,                                         KC_AMPR, KC_HASH, KC_LBRC, KC_RBRC,  KC_AT , KC_BSLS,
       MN_QUOT, KC_SCLN,   KC_L ,   KC_K ,   KC_J ,   KC_H ,                                         KC_EXLM, SYM_EQL, KC_LPRN, KC_RPRN, KC_DLR , KC_GRAVE,
       KC_RSFT, MN_SLSH,  KC_DOT, KC_COMM,   KC_M ,   KC_N ,   MN_8 ,   MN_6 ,     _______,   MAIN , KC_PIPE, KC_UNDS, KC_LCBR, KC_RCBR, KC_TILD, _______,
-                                   MN_0 ,   MN_9 , _______,  MN_SPC,   KC_7 ,     _______, _______, _______, _______, _______,
+                                   MN_0 ,   MN_9 , _______,  MN_SPC,   MN_7 ,     _______, _______, _______, _______, _______,
 
       _______, _______, _______, _______, _______,                                                           _______, _______, _______, _______, _______
     ),
@@ -138,8 +140,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |  1   |  2   |  3   |  -   |  /   | MAIN |      |  |  5/→ |  3/← |  B   |  V   |  C   |  X   |LSft/Z| LShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |  4   |Enter |      |  2/  |  1/  |
- *                        |      |      |      |      |      |  |      |      |      | LAlt | LCtrl|
+ *                        |      |      |      |      |      |  |  4/  |Enter |      |  2/  |  1/  |
+ *                        |      |      |      |      |      |  | Sway |      |      | LAlt | LCtrl|
  *                        `----------------------------------'  `----------------------------------'
  * ,-----------------------------------.                                              ,-----------------------------------.
  * |      |      |       |      |      |                                              |      |      |       |      |      |
@@ -149,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,   KC_7 ,   KC_8 ,   KC_9 , KC_PLUS, KC_ASTR,                                           KC_T ,   KC_R ,   KC_E ,   KC_W ,   KC_Q ,  KC_TAB,
       KC_PERC,   KC_4 ,   KC_5 ,   KC_6 ,   KC_0 , KC_DOT ,                                           KC_G ,   KC_F ,   KC_D ,   KC_S ,   KC_A ,  MN_ESC,
       _______,   KC_1 ,   KC_2 ,   KC_3 , KC_MINS, KC_SLSH,   MAIN , _______,       MN_5 ,   MN_3 ,   KC_B ,   KC_V ,   KC_C ,   KC_X ,   MN_Z , KC_LSFT,
-                                 _______, _______, _______, _______, _______,       KC_4 ,  MN_ENT, _______,   MN_2 ,   MN_1 ,
+                                 _______, _______, _______, _______, _______,       MN_4 ,  MN_ENT, _______,   MN_2 ,   MN_1 ,
 
       _______, _______, _______, _______, _______,                                                       _______, _______, _______, _______, _______
     ),
@@ -301,10 +303,8 @@ const uint16_t PROGMEM combo_lalt[] = { KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_ralt[] = { KC_M, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM combo_zoom_in[] = { MN_Z, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_zoom_out[] = { KC_M, MN_SLSH, COMBO_END};
-const uint16_t PROGMEM combo_lsway[] = { MN_ENT, MN_3, COMBO_END};
-const uint16_t PROGMEM combo_rsway[] = { MN_SPC, MN_8, COMBO_END};
-const uint16_t PROGMEM combo_lmouse[] = { MN_5, KC_4, COMBO_END};
-const uint16_t PROGMEM combo_rmouse[] = { MN_6, KC_7, COMBO_END};
+const uint16_t PROGMEM combo_lmouse[] = { MN_ENT, MN_3, COMBO_END};
+const uint16_t PROGMEM combo_rmouse[] = { MN_SPC, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_light[] = { MN_6, MN_8, COMBO_END};
 
 combo_t key_combos[] = {
@@ -314,8 +314,6 @@ combo_t key_combos[] = {
     COMBO(combo_ralt, KC_RALT),
     COMBO(combo_zoom_in, LCTL(KC_PLUS)),
     COMBO(combo_zoom_out, LCTL(KC_MINUS)),
-    COMBO(combo_lsway, LM(_SWAY, MOD_LGUI)),
-    COMBO(combo_rsway, LM(_SWAY, MOD_RGUI)),
     COMBO(combo_lmouse, TT(_MOUSE)),
     COMBO(combo_rmouse, TT(_MOUSE)),
     COMBO(combo_light, RM_TOGG)
