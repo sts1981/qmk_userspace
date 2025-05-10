@@ -53,8 +53,8 @@ enum tap_dance_codes {
 #define MN_2 MT(MOD_LALT, KC_2)
 #define MN_3 TD(TD_3_LEFT)
 #define MN_5 TD(TD_5_RIGHT)
-#define MN_6 TD(TD_6_UP)
-#define MN_8 TD(TD_8_DOWN)
+#define MN_6 TD(TD_6_DOWN)
+#define MN_8 TD(TD_8_UP)
 #define MN_9 MT(MOD_RALT, KC_9)
 #define MN_0 MT(MOD_RCTL, KC_0)
 #define OS_LMIR OSL(_LMIRROR)
@@ -305,6 +305,7 @@ const uint16_t PROGMEM combo_lsway[] = { KC_4, MN_5, COMBO_END};
 const uint16_t PROGMEM combo_rsway[] = { KC_7, MN_6, COMBO_END};
 const uint16_t PROGMEM combo_lmouse[] = { MN_ENT, MN_3, COMBO_END};
 const uint16_t PROGMEM combo_rmouse[] = { MN_SPC, MN_8, COMBO_END};
+const uint16_t PROGMEM combo_light[] = { MN_6, MN_8, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_lctl, KC_LCTL),
@@ -317,6 +318,7 @@ combo_t key_combos[] = {
     COMBO(combo_rsway, LM(_SWAY, MOD_RGUI)),
     COMBO(combo_lmouse, TT(_MOUSE)),
     COMBO(combo_rmouse, TT(_MOUSE)),
+    COMBO(combo_light, RM_TOGG)
 };
 
 typedef struct {
