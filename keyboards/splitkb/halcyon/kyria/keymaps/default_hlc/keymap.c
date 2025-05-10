@@ -299,12 +299,12 @@ const uint16_t PROGMEM combo_lctl[] = { KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM combo_rctl[] = { KC_DOT, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM combo_lalt[] = { KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_ralt[] = { KC_M, KC_COMMA, COMBO_END};
-const uint16_t PROGMEM combo_lmeta[] = { MN_Z, KC_V, COMBO_END};
-const uint16_t PROGMEM combo_rmeta[] = { KC_M, MN_SLSH, COMBO_END};
-const uint16_t PROGMEM combo_lsway[] = { KC_4, MN_5, COMBO_END};
-const uint16_t PROGMEM combo_rsway[] = { KC_7, MN_6, COMBO_END};
-const uint16_t PROGMEM combo_lmouse[] = { MN_ENT, MN_3, COMBO_END};
-const uint16_t PROGMEM combo_rmouse[] = { MN_SPC, MN_8, COMBO_END};
+const uint16_t PROGMEM combo_zoom_in[] = { MN_Z, KC_V, COMBO_END};
+const uint16_t PROGMEM combo_zoom_out[] = { KC_M, MN_SLSH, COMBO_END};
+const uint16_t PROGMEM combo_lsway[] = { MN_ENT, MN_3, COMBO_END};
+const uint16_t PROGMEM combo_rsway[] = { MN_SPC, MN_8, COMBO_END};
+const uint16_t PROGMEM combo_lmouse[] = { MN_5, KC_4, COMBO_END};
+const uint16_t PROGMEM combo_rmouse[] = { MN_6, KC_7, COMBO_END};
 const uint16_t PROGMEM combo_light[] = { MN_6, MN_8, COMBO_END};
 
 combo_t key_combos[] = {
@@ -312,12 +312,12 @@ combo_t key_combos[] = {
     COMBO(combo_rctl, KC_RCTL),
     COMBO(combo_lalt, KC_LALT),
     COMBO(combo_ralt, KC_RALT),
-    COMBO(combo_lmeta, OSM(MOD_LGUI)),
-    COMBO(combo_rmeta, OSM(MOD_RGUI)),
+    COMBO(combo_zoom_in, LCTL(KC_PLUS)),
+    COMBO(combo_zoom_out, LCTL(KC_MINUS)),
     COMBO(combo_lsway, LM(_SWAY, MOD_LGUI)),
     COMBO(combo_rsway, LM(_SWAY, MOD_RGUI)),
-    COMBO(combo_lmouse, TT(_MOUSE)),
-    COMBO(combo_rmouse, TT(_MOUSE)),
+    COMBO(combo_lmouse, MO(_MOUSE)),
+    COMBO(combo_rmouse, MO(_MOUSE)),
     COMBO(combo_light, RM_TOGG)
 };
 
