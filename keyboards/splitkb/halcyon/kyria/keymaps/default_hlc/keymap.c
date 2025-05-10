@@ -19,11 +19,11 @@ enum tap_dance_codes {
     TD_5_RIGHT,
     TD_6_DOWN,
     TD_8_UP,
-    TD_1_0,
-    TD_2_9,
-    TD_3_8,
-    TD_4_7,
-    TD_5_6
+    TD_SWAYW_1,
+    TD_SWAYW_2,
+    TD_SWAYW_3,
+    TD_SWAYW_4,
+    TD_SWAYW_5
 };
 
 // Aliases for readability
@@ -67,11 +67,11 @@ enum tap_dance_codes {
 
 #define SYM_EQL TD(TD_EQLS)
 
-#define TH_1_0 TD(TD_1_0)
-#define TH_2_9 TD(TD_2_9)
-#define TH_3_8 TD(TD_3_8)
-#define TH_4_7 TD(TD_4_7)
-#define TH_5_6 TD(TD_5_6)
+#define SWAYW_1 TD(TD_SWAYW_1)
+#define SWAYW_2 TD(TD_SWAYW_2)
+#define SWAYW_3 TD(TD_SWAYW_3)
+#define SWAYW_4 TD(TD_SWAYW_4)
+#define SWAYW_5 TD(TD_SWAYW_5)
 
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
@@ -226,8 +226,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   */
      [_SWAY] = LAYOUT_split_3x6_5_hlc(
        _______, _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______, _______,
-         MAIN , _______,  KC_L  ,   KC_K ,   KC_J ,   KC_H ,                                               KC_H ,   KC_J ,   KC_K ,   KC_L , _______, _______,
-       _______,  TH_1_0,  TH_2_9,  TH_3_8,  TH_4_7,  TH_5_6, _______, _______,         _______, _______,  TH_5_6,  TH_4_7,  TH_3_8,  TH_2_9,  TH_1_0, _______,
+         MAIN , _______, G(KC_L), G(KC_K), G(KC_J), G(KC_H),                                             G(KC_H), G(KC_J), G(KC_K), G(KC_L), _______, _______,
+       _______, SWAYW_1, SWAYW_2, SWAYW_3, SWAYW_4, SWAYW_5, _______, _______,         _______, _______, SWAYW_5, SWAYW_4, SWAYW_3, SWAYW_2, SWAYW_1, _______,
                                   _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______,
 
        _______, _______, _______, _______, _______,                                                               _______, _______, _______, _______, _______
@@ -364,11 +364,11 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_5_RIGHT] = ACTION_TAP_DANCE_TAP_HOLD(KC_5, KC_RIGHT),
     [TD_6_DOWN] = ACTION_TAP_DANCE_TAP_HOLD(KC_6, KC_DOWN),
     [TD_8_UP] = ACTION_TAP_DANCE_TAP_HOLD(KC_8, KC_UP),
-    [TD_1_0] = ACTION_TAP_DANCE_TAP_HOLD(KC_1, KC_0),
-    [TD_2_9] = ACTION_TAP_DANCE_TAP_HOLD(KC_2, KC_9),
-    [TD_3_8] = ACTION_TAP_DANCE_TAP_HOLD(KC_3, KC_8),
-    [TD_4_7] = ACTION_TAP_DANCE_TAP_HOLD(KC_4, KC_7),
-    [TD_5_6] = ACTION_TAP_DANCE_TAP_HOLD(KC_5, KC_6),
+    [TD_SWAYW_1] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_1), LGUI(KC_0)),
+    [TD_SWAYW_2] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_2), LGUI(KC_9)),
+    [TD_SWAYW_3] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_3), LGUI(KC_8)),
+    [TD_SWAYW_4] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_4), LGUI(KC_7)),
+    [TD_SWAYW_5] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_5), LGUI(KC_6)),
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
