@@ -316,8 +316,8 @@ combo_t key_combos[] = {
     COMBO(combo_zoom_out, LCTL(KC_MINUS)),
     COMBO(combo_lsway, LM(_SWAY, MOD_LGUI)),
     COMBO(combo_rsway, LM(_SWAY, MOD_RGUI)),
-    COMBO(combo_lmouse, OSL(_MOUSE)),
-    COMBO(combo_rmouse, OSL(_MOUSE)),
+    COMBO(combo_lmouse, TT(_MOUSE)),
+    COMBO(combo_rmouse, TT(_MOUSE)),
     COMBO(combo_light, RM_TOGG)
 };
 
