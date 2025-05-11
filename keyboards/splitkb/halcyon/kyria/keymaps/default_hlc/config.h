@@ -13,6 +13,7 @@
 #define COMBO_TERM 75
 
 #define LEADER_PER_KEY_TIMING
+#define LEADER_NO_TIMEOUT // disable timeout for starting leader sequence
 #define LEADER_TIMEOUT 200
 
 //#define MK_COMBINED
