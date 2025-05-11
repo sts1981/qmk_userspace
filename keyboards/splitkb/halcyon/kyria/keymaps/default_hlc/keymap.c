@@ -11,6 +11,7 @@ enum layers {
     _NAV,
     _SWAY,
     _ADJUST,
+    _SCROLL
 };
 
 enum tap_dance_codes {
@@ -23,7 +24,8 @@ enum tap_dance_codes {
     TD_SWAYW_2,
     TD_SWAYW_3,
     TD_SWAYW_4,
-    TD_SWAYW_5
+    TD_SWAYW_5,
+    TD_SCROLL_PGDN
 };
 
 // Aliases for readability
@@ -74,6 +76,9 @@ enum tap_dance_codes {
 #define SWAYW_3 TD(TD_SWAYW_3)
 #define SWAYW_4 TD(TD_SWAYW_4)
 #define SWAYW_5 TD(TD_SWAYW_5)
+
+#define SCL_PGD TD(TD_SCROLL_PGDN)
+#define SCL_SSPC LSFT(KC_SPC)
 
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
@@ -260,6 +265,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, _______,  _______, _______, _______,                                                               _______, _______, _______, _______, _______
     ),
 
+/*
+ * Scroll Layer: for scrolling while keyboard tray is pushed in
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * | MAIN   |      |      |      |      |      |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | MAIN   |WhlRgt|WhlLft|WhlUp |WhlDn | PgUp |  K   |  J   |  |  J   |  K   | PgUp |WhlDn |WhlUp |WhlLft|WhlRgt|        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |  L   |  H   |ShiftP|Shift+|Space |  |Space |Shift+|ShiftP|  H   |  L   |
+ *                        |      |      |/PgDn |Space |      |  |      |Space |/PgDn |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ * ,-----------------------------------.                                              ,-----------------------------------.
+ * |      |      |       |      |      |                                              |      |      |       |      |      |
+ * `-----------------------------------'                                              `-----------------------------------'
+ */
+    [_SCROLL] = LAYOUT_split_3x6_5_hlc(
+      _______, _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______, _______,
+        MAIN , _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______, _______,
+        MAIN , MS_WHLR, MS_WHLL, MS_WHLU, MS_WHLD, KC_PGUP,   KC_K ,   KC_J ,           KC_J ,   KC_K , KC_PGUP, MS_WHLD, MS_WHLU, MS_WHLL, MS_WHLR, _______,
+                                   KC_L ,   KC_H , SCL_PGD,SCL_SSPC, KC_SPC ,          KC_SPC,SCL_SSPC, SCL_PGD,   KC_H ,   KC_L ,
+
+      _______, _______, _______, _______, _______,                                                               _______, _______, _______, _______, _______
+    ),
+
 // /*
 //  * Halcyon Layer template
 //  *
@@ -296,6 +327,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [4] = { ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______)  },
     [5] = { ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______)  },
     [6] = { ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______)  },
+    [7] = { ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______),  ENCODER_CCW_CW(_______, _______)  },
 };
 #endif
 
@@ -310,6 +342,7 @@ const uint16_t PROGMEM combo_rmouse[] = { MN_SPC, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_light[] = { MN_6, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_lleader[] = { MN_Z, KC_B, COMBO_END};
 const uint16_t PROGMEM combo_rleader[] = { MN_SLSH, KC_N, COMBO_END};
+const uint16_t PROGMEM combo_scroll[] = { MN_4, MN_7, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_lctl, KC_LCTL),
@@ -323,6 +356,7 @@ combo_t key_combos[] = {
     COMBO(combo_light, RM_TOGG),
     COMBO(combo_lleader, QK_LEAD),
     COMBO(combo_rleader, QK_LEAD),
+    COMBO(combo_scroll, TO(_SCROLL))
 };
 
 typedef struct {
@@ -375,6 +409,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_SWAYW_3] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_3), LGUI(KC_8)),
     [TD_SWAYW_4] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_4), LGUI(KC_7)),
     [TD_SWAYW_5] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_5), LGUI(KC_6)),
+    [TD_SCROLL_PGDN] = ACTION_TAP_DANCE_TAP_HOLD(LSFT(KC_P), KC_PGDN)
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
