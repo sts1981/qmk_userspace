@@ -392,5 +392,4 @@ void leader_end_user(void) {
     if (leader_sequence_two_keys(KC_L, KC_A)) {
         layer_move(_ADJUST);
     }
-    rgb_matrix_toggle();
 }
