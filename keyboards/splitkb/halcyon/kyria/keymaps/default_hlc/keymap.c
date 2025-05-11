@@ -188,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Navigation, other frequently used keys
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * | ADJUST |      | LCtrl| LAlt | BkSpc|PrtSc |                              |CpsWrd| Del  | RAlt | RCtrl|      | ADJUST |
+ * | ADJUST |      | LCtrl| LAlt | BkSpc|PrtSc |                              |CpsWrd| Del  | RAlt | RCtrl|      | LEADER |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | MAIN   |AlCtTb|   →  |  ↑   |   ↓  |  ←   |                              |   ←  |  ↓   |   ↑  |   →  |AlCtTb|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_NAV] = LAYOUT_split_3x6_5_hlc(
-      ADJUST , _______,OSM_LCTL,OSM_LALT, KC_BSPC, KC_PSCR,                                     CW_TOGG, KC_DEL ,OSM_RALT,OSM_RCTL, _______, ADJUST ,
+      ADJUST , _______,OSM_LCTL,OSM_LALT, KC_BSPC, KC_PSCR,                                     CW_TOGG, KC_DEL ,OSM_RALT,OSM_RCTL, _______, QK_LEAD,
         MAIN , WIN_SEL, KC_RGHT, KC_UP  , KC_DOWN, KC_LEFT,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, WIN_SEL, _______,
       _______, WIN_NXT, _______, KC_PGUP, KC_PGDN, _______, _______, _______, _______, _______, _______, KC_PGDN, KC_PGUP, _______, WIN_NXT, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
