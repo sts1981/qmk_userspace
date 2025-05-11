@@ -40,8 +40,10 @@ enum tap_dance_codes {
 
 #define OSM_LALT OSM(MOD_LALT)
 #define OSM_LCTL OSM(MOD_LCTL)
+#define OSM_LSFT OSM(MOD_LSFT)
 #define OSM_RALT OSM(MOD_RALT)
 #define OSM_RCTL OSM(MOD_RCTL)
+#define OSM_RSFT OSM(MOD_RSFT)
 
 #define MN_Z MT(MOD_LSFT, KC_Z)
 #define MN_SLSH MT(MOD_RSFT, KC_SLASH)
@@ -99,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_split_3x6_5_hlc(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y  ,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
       MN_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H  ,   KC_J ,  KC_K ,   KC_L ,KC_SCLN, MN_QUOT,
-     KC_LSFT , MN_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , MN_3   , MN_5   ,     MN_6   , MN_8  , KC_N  ,   KC_M ,KC_COMM, KC_DOT ,MN_SLSH, KC_RSFT,
+     OSM_LSFT, MN_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , MN_3   , MN_5   ,     MN_6   , MN_8  , KC_N  ,   KC_M ,KC_COMM, KC_DOT ,MN_SLSH,OSM_RSFT,
                                  MN_1  ,   MN_2 , OS_LMIR, MN_ENT , MN_4   ,     MN_7   , MN_SPC,OS_RMIR,   MN_9 ,  MN_0 ,
      KC_MUTE, KC_NO,  KC_NO, KC_NO, KC_NO,                                                                KC_MUTE, KC_NO, KC_NO, KC_NO, KC_NO
     ),
@@ -124,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LMIRROR] = LAYOUT_split_3x6_5_hlc(
       KC_BSPC,   KC_P ,   KC_O ,   KC_I ,   KC_U ,   KC_Y ,                                         KC_AMPR, KC_HASH, KC_LBRC, KC_RBRC,  KC_AT , KC_BSLS,
       MN_QUOT, KC_SCLN,   KC_L ,   KC_K ,   KC_J ,   KC_H ,                                         KC_EXLM, SYM_EQL, KC_LPRN, KC_RPRN, KC_DLR , KC_GRAVE,
-      KC_RSFT, MN_SLSH,  KC_DOT, KC_COMM,   KC_M ,   KC_N ,   MN_8 ,   MN_6 ,     _______,   MAIN , KC_PIPE, KC_UNDS, KC_LCBR, KC_RCBR, KC_TILD, _______,
+     OSM_RSFT, MN_SLSH,  KC_DOT, KC_COMM,   KC_M ,   KC_N ,   MN_8 ,   MN_6 ,     _______,   MAIN , KC_PIPE, KC_UNDS, KC_LCBR, KC_RCBR, KC_TILD, _______,
                                    MN_0 ,   MN_9 , _______,  MN_SPC,   MN_7 ,     _______, _______, _______, _______, _______,
 
       _______, _______, _______, _______, _______,                                                           _______, _______, _______, _______, _______
@@ -150,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RMIRROR] = LAYOUT_split_3x6_5_hlc(
       _______,   KC_7 ,   KC_8 ,   KC_9 , KC_PLUS, KC_ASTR,                                           KC_T ,   KC_R ,   KC_E ,   KC_W ,   KC_Q ,  KC_TAB,
       KC_PERC,   KC_4 ,   KC_5 ,   KC_6 ,   KC_0 , KC_DOT ,                                           KC_G ,   KC_F ,   KC_D ,   KC_S ,   KC_A ,  MN_ESC,
-      _______,   KC_1 ,   KC_2 ,   KC_3 , KC_MINS, KC_SLSH,   MAIN , _______,       MN_5 ,   MN_3 ,   KC_B ,   KC_V ,   KC_C ,   KC_X ,   MN_Z , KC_LSFT,
+      _______,   KC_1 ,   KC_2 ,   KC_3 , KC_MINS, KC_SLSH,   MAIN , _______,       MN_5 ,   MN_3 ,   KC_B ,   KC_V ,   KC_C ,   KC_X ,   MN_Z ,OSM_LSFT,
                                  _______, _______, _______, _______, _______,       MN_4 ,  MN_ENT, _______,   MN_2 ,   MN_1 ,
 
       _______, _______, _______, _______, _______,                                                       _______, _______, _______, _______, _______
