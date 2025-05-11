@@ -188,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Navigation, other frequently used keys
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * | ADJUST |      | LCtrl| LAlt | BkSpc|PrtSc |                              |CpsWrd| Del  | RAlt | RCtrl|      | LEADER |
+ * |        |      | LCtrl| LAlt | BkSpc|PrtSc |                              |CpsWrd| Del  | RAlt | RCtrl|      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | MAIN   |AlCtTb|   →  |  ↑   |   ↓  |  ←   |                              |   ←  |  ↓   |   ↑  |   →  |AlCtTb|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_NAV] = LAYOUT_split_3x6_5_hlc(
-      ADJUST , _______,OSM_LCTL,OSM_LALT, KC_BSPC, KC_PSCR,                                     CW_TOGG, KC_DEL ,OSM_RALT,OSM_RCTL, _______, QK_LEAD,
+      _______, _______,OSM_LCTL,OSM_LALT, KC_BSPC, KC_PSCR,                                     CW_TOGG, KC_DEL ,OSM_RALT,OSM_RCTL, _______, _______,
         MAIN , WIN_SEL, KC_RGHT, KC_UP  , KC_DOWN, KC_LEFT,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, WIN_SEL, _______,
       _______, WIN_NXT, _______, KC_PGUP, KC_PGDN, _______, _______, _______, _______, _______, _______, KC_PGDN, KC_PGUP, _______, WIN_NXT, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -309,6 +309,7 @@ const uint16_t PROGMEM combo_lmouse[] = { MN_ENT, MN_3, COMBO_END};
 const uint16_t PROGMEM combo_rmouse[] = { MN_SPC, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_light[] = { MN_6, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_lleader[] = { MN_Z, KC_B, COMBO_END};
+const uint16_t PROGMEM combo_rleader[] = { MN_SLSH, KC_N, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_lctl, KC_LCTL),
@@ -320,7 +321,8 @@ combo_t key_combos[] = {
     COMBO(combo_lmouse, TT(_MOUSE)),
     COMBO(combo_rmouse, TT(_MOUSE)),
     COMBO(combo_light, RM_TOGG),
-    COMBO(combo_lleader, QK_LEAD)
+    COMBO(combo_lleader, QK_LEAD),
+    COMBO(combo_rleader, QK_LEAD),
 };
 
 typedef struct {
@@ -390,4 +392,5 @@ void leader_end_user(void) {
     if (leader_sequence_two_keys(KC_L, KC_A)) {
         layer_move(_ADJUST);
     }
+    rgb_matrix_toggle();
 }
