@@ -387,11 +387,12 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 
 void leader_start_user(void) {
-    rgb_matrix_enable();
+    rgb_matrix_toggle();
 }
 
 void leader_end_user(void) {
     if (leader_sequence_two_keys(KC_L, KC_A)) {
         layer_move(_ADJUST);
     }
+    rgb_matrix_toggle();
 }
