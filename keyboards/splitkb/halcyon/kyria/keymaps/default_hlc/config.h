@@ -13,7 +13,7 @@
 #define COMBO_TERM 75
 
 #define LEADER_PER_KEY_TIMING
-#define LEADER_TIMEOUT 2000
+#define LEADER_TIMEOUT 200
 
 //#define MK_COMBINED
 //#define MOUSEKEY_DELAY 0
