@@ -308,6 +308,7 @@ const uint16_t PROGMEM combo_zoom_out[] = { KC_M, MN_SLSH, COMBO_END};
 const uint16_t PROGMEM combo_lmouse[] = { MN_ENT, MN_3, COMBO_END};
 const uint16_t PROGMEM combo_rmouse[] = { MN_SPC, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_light[] = { MN_6, MN_8, COMBO_END};
+const uint16_t PROGMEM combo_lleader[] = { MN_Z, KC_B, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_lctl, KC_LCTL),
@@ -318,7 +319,8 @@ combo_t key_combos[] = {
     COMBO(combo_zoom_out, LCTL(KC_MINUS)),
     COMBO(combo_lmouse, TT(_MOUSE)),
     COMBO(combo_rmouse, TT(_MOUSE)),
-    COMBO(combo_light, RM_TOGG)
+    COMBO(combo_light, RM_TOGG),
+    COMBO(combo_lleader, QK_LEAD)
 };
 
 typedef struct {
@@ -381,5 +383,11 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return g_tapping_term + 50;
         default:
             return g_tapping_term;
+    }
+}
+
+void leader_end_user(void) {
+    if (leader_sequence_two_keys(KC_L, KC_A)) {
+        layer_move(_ADJUST);
     }
 }
