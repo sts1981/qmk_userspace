@@ -193,11 +193,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Navigation, other frequently used keys
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      | LCtrl| LAlt | BkSpc|PrtSc |                              |CpsWrd| Del  | RAlt | RCtrl|      |        |
+ * | BkSpc  | Del  | LCtrl| LAlt | BkSpc|PrtSc |                              |CpsWrd|CpsWrd| RAlt | RCtrl| Del  |  BkSpc |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | MAIN   |AlCtTb|   →  |  ↑   |   ↓  |  ←   |                              |   ←  |  ↓   |   ↑  |   →  |AlCtTb|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |AltTab|      | PgUp | PgDn |      |      |      |  |      |      |      | PgDn | PgUp |      |AltTab|        |
+ * |        |AltTab| End  | PgUp | PgDn | Home |      |      |  |      |      | Home | PgDn | PgUp | End  |AltTab|        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -207,9 +207,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_NAV] = LAYOUT_split_3x6_5_hlc(
-      _______, _______,OSM_LCTL,OSM_LALT, KC_BSPC, KC_PSCR,                                     CW_TOGG, KC_DEL ,OSM_RALT,OSM_RCTL, _______, _______,
+      KC_BSPC, KC_DEL ,OSM_LCTL,OSM_LALT, KC_BSPC, KC_PSCR,                                     CW_TOGG, CW_TOGG,OSM_RALT,OSM_RCTL, KC_DEL , KC_BSPC,
         MAIN , WIN_SEL, KC_RGHT, KC_UP  , KC_DOWN, KC_LEFT,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, WIN_SEL, _______,
-      _______, WIN_NXT, _______, KC_PGUP, KC_PGDN, _______, _______, _______, _______, _______, _______, KC_PGDN, KC_PGUP, _______, WIN_NXT, _______,
+      _______, WIN_NXT,  KC_END, KC_PGUP, KC_PGDN, KC_HOME, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, WIN_NXT, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
      _______, _______,  _______, _______, _______,                                                       _______, _______, _______, _______, _______
     ),
