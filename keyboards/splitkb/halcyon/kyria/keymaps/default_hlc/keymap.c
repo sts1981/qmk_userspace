@@ -71,6 +71,8 @@ enum tap_dance_codes {
 
 #define SYM_EQL TD(TD_EQLS)
 
+#define MSE_OFF TG(_MOUSE)
+
 #define SWAYW_1 TD(TD_SWAYW_1)
 #define SWAYW_2 TD(TD_SWAYW_2)
 #define SWAYW_3 TD(TD_SWAYW_3)
@@ -169,9 +171,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,-------------------------------------------.                              ,-------------------------------------------.
   * |  F11   |  F1  |  F2  |  F3  |  F4  |  F5  |                              |  F6  |  F7  |  F8  |  F9  |  F10 |  F12   |
   * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-  * |  MAIN  |      |MouseR|MouseU|MouseD|MouseL|                              |MouseL|MouseD|MouseU|MouseR|      |  MAIN  |
+  * |LYR OFF |      |MouseR|MouseU|MouseD|MouseL|                              |MouseL|MouseD|MouseU|MouseR|      |LYR OFF |
   * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-  * |        |Click |      |WheelU|WheelD|      |      |      |  |      |      |      |WheelD|WheelU|      |Click |        |
+  * |  MAIN  |Click |      |WheelU|WheelD|      |      |      |  |      |      |      |WheelD|WheelU|      |Click | MAIN   |
   * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
   *                        |      |      |      |Click |RClick|  |RClick| Click|      |      |      |
   *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -182,8 +184,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   */
      [_MOUSE] = LAYOUT_split_3x6_5_hlc(
         KC_F11,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 ,  KC_F5 ,                                            KC_F6 ,  KC_F7 ,  KC_F8 ,  KC_F9 ,  KC_F10,  KC_F12,
-         MAIN , _______, MS_RGHT,  MS_UP , MS_DOWN, MS_LEFT,                                           MS_LEFT, MS_DOWN,  MS_UP , MS_RGHT, _______,   MAIN ,
-       _______, MS_BTN1, _______, MS_WHLU, MS_WHLD, _______, _______, _______,       _______, _______, _______, MS_WHLD, MS_WHLU, _______, MS_BTN1, _______,
+       MSE_OFF, _______, MS_RGHT,  MS_UP , MS_DOWN, MS_LEFT,                                           MS_LEFT, MS_DOWN,  MS_UP , MS_RGHT, _______, MSE_OFF,
+         MAIN , MS_BTN1, _______, MS_WHLU, MS_WHLD, _______, _______, _______,       _______, _______, _______, MS_WHLD, MS_WHLU, _______, MS_BTN1,   MAIN ,
                                   _______, _______, _______, MS_BTN1, MS_BTN2,       MS_BTN2, MS_BTN1, _______, _______, _______,
 
        _______, _______, _______, _______, _______,                                                             _______, _______, _______, _______, _______
