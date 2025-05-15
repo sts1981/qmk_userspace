@@ -143,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * RMirror: Numbers on LH, mirror on RH
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  7   |  8   |  9   |  +   |  *   |                              |  T   |  R   |  E   |  W   |  Q   |  Tab   |
+ * |  Bksp  |  7   |  8   |  9   |  +   |  *   |                              |  T   |  R   |  E   |  W   |  Q   |  Tab   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |    %   |  4   |  5   |  6   |  0   |  .   |                              |  G   |  F   |  D   |  S   |  A   |Meta/Esc|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -157,7 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_RMIRROR] = LAYOUT_split_3x6_5_hlc(
-      _______,   KC_7 ,   KC_8 ,   KC_9 , KC_PLUS, KC_ASTR,                                           KC_T ,   KC_R ,   KC_E ,   KC_W ,   KC_Q ,  KC_TAB,
+      KC_BSPC,   KC_7 ,   KC_8 ,   KC_9 , KC_PLUS, KC_ASTR,                                           KC_T ,   KC_R ,   KC_E ,   KC_W ,   KC_Q ,  KC_TAB,
       KC_PERC,   KC_4 ,   KC_5 ,   KC_6 ,   KC_0 , KC_DOT ,                                           KC_G ,   KC_F ,   KC_D ,   KC_S ,   KC_A ,  MN_ESC,
       _______,   KC_1 ,   KC_2 ,   KC_3 , KC_MINS, KC_SLSH,   MAIN , _______,       MN_5 ,   MN_3 ,   KC_B ,   KC_V ,   KC_C ,   KC_X ,   MN_Z ,OSM_LSFT,
                                  _______, _______, _______, _______, _______,       MN_4 ,  MN_ENT, _______,   MN_2 ,   MN_1 ,
@@ -341,6 +341,7 @@ const uint16_t PROGMEM combo_zoom_in[] = { MN_Z, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_zoom_out[] = { KC_M, MN_SLSH, COMBO_END};
 const uint16_t PROGMEM combo_lmouse[] = { MN_ENT, MN_3, COMBO_END};
 const uint16_t PROGMEM combo_rmouse[] = { MN_SPC, MN_8, COMBO_END};
+const uint16_t PROGMEM combo_lnumpad[] = { MN_4, MN_5, COMBO_END};
 const uint16_t PROGMEM combo_light[] = { MN_6, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_lleader[] = { MN_Z, KC_B, COMBO_END};
 const uint16_t PROGMEM combo_rleader[] = { MN_SLSH, KC_N, COMBO_END};
@@ -355,6 +356,7 @@ combo_t key_combos[] = {
     COMBO(combo_zoom_out, LCTL(KC_MINUS)),
     COMBO(combo_lmouse, TT(_MOUSE)),
     COMBO(combo_rmouse, TT(_MOUSE)),
+    COMBO(combo_lnumpad, TT(_RMIRROR)),
     COMBO(combo_light, RM_TOGG),
     COMBO(combo_lleader, QK_LEAD),
     COMBO(combo_rleader, QK_LEAD),
