@@ -422,6 +422,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return g_tapping_term + 50;
         case MN_QUOT:
             return g_tapping_term + 50;
+        case MN_Z:
+            return g_tapping_term - 25;
+        case MN_SLSH:
+            return g_tapping_term - 25;
         default:
             return g_tapping_term;
     }
