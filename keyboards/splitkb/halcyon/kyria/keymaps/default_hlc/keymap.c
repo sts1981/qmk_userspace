@@ -435,4 +435,7 @@ void leader_end_user(void) {
     if (leader_sequence_two_keys(KC_L, KC_A)) {
         layer_move(_ADJUST);
     }
+    if (leader_sequence_two_keys(KC_R, KC_R)) {
+        soft_reset_keyboard();
+    }
 }
