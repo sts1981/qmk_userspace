@@ -1,4 +1,71 @@
-# Halcyon Kyria's Default Keymap
+# STS Rev 1 keymap
+
+## Main layer (QWERTY)
+Thumb keys:
+- primary thumb keys are enter/space when tapped, toggle Nav layer when held
+- inner thumb keys are OSMs toggling mirror/symbol/numpad layers
+- outer thumb keys activate Sway layer, which provides keys for workspace
+  switching and window switching
+- vertical combos to activate mouse layer, and allow access to numpad from left hand
+
+This layer mostly matches the default Kyria layout, except for the thumb keys.
+The `Z` and `/` keys also act as Shift when held. The top right key acts as
+Backspace, which is fine (compared to other keyboards, where this key is
+annoying to hit).
+
+Remaining thumb keys provide numbers when tapped, and other keys (Ctrl, Alt, and
+arrow keys) when held.
+There are also combos for Ctrl and Alt, which are easier to access than the
+number keys.
+
+## Nav
+
+This key primarily provides arrow and PgUp/PgDn keys. Other keys that don't fit
+on the Main layer (i.e. Del, PrtSc, CapsWord) are also on this layer. This layer also
+includes OSM Ctl and Alt keys.
+
+## Sway
+
+This layer only supports window and workspace switching; the goal is to provide
+easy access to these keys from both hands. All other Sway commands are
+reached using the Meta key on the main layer.
+
+## Other Layers
+
+The LMirror layer turns the left half into a mirror of the right side, and puts
+symbols on the right side.
+
+The RMirror layer turns the right half into a mirror of the left side, and puts
+a numpad on the left side. 
+
+The Mouse layer primarily contains mouse keys, but also includes function keys
+on the top row.
+
+The Adjust layer is only accessible through a leader sequence. It contains keys
+for flashing, adjusting the lighting, and changing the tapping term.
+
+There is a Scroll layer.
+
+## Other QMK features
+
+### Leader
+
+Leader keys are used to enter the Adjust layer (which includes keys for flashing), and to reboot the keyboard (this is a soft reset, without flashing).
+
+### Bootmagic
+Bootmagic should be turned on by default in the code.
+The bootmagic keys are not explicitly configured.
+Based on the docs/discord, I believe they should be the top left key on the left half and the top right key on the right half.
+
+## Display
+
+The default Kyria display code is used.
+
+## Trackpad
+
+The defalt settings are used.
+
+# Halcyon Kyria's Default Keymap (old)
 
 ![KLE render of the default Halcyon Kyria keymap with QWERTY as the base layer. Layers are shown in sublegends.](https://i.ibb.co/RQZx2dY/default-kyria2.jpg)
 
