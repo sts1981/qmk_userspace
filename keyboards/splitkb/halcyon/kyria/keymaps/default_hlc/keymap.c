@@ -173,9 +173,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
   * |LYR OFF |      |MouseR|MouseU|MouseD|MouseL|                              |MouseL|MouseD|MouseU|MouseR|      |LYR OFF |
   * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-  * |  MAIN  |Click |WheelR|WheelU|WheelD|WheelL|      |      |  |RClick|      |WheelL|WheelD|WheelU|WheelR|Click | MAIN   |
+  * |  MAIN  |Click |WheelR|WheelU|WheelD|WheelL|      |      |  |WheelD|WheelU|WheelL|WheelD|WheelU|WheelR|Click | MAIN   |
   * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-  *                        |      |      |RClick|Click |      |  |      | Click|RClick|      |      |
+  *                        |      |      |RClick|Click |      |  |RClick| Click|RClick|      |      |
   *                        |      |      |      |      |      |  |      |      |      |      |      |
   *                        `----------------------------------'  `----------------------------------'
   * ,-----------------------------------.                                              ,-----------------------------------.
@@ -185,8 +185,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      [_MOUSE] = LAYOUT_split_3x6_5_hlc(
         KC_F11,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 ,  KC_F5 ,                                            KC_F6 ,  KC_F7 ,  KC_F8 ,  KC_F9 ,  KC_F10,  KC_F12,
        MSE_OFF, _______, MS_RGHT,  MS_UP , MS_DOWN, MS_LEFT,                                           MS_LEFT, MS_DOWN,  MS_UP , MS_RGHT, _______, MSE_OFF,
-         MAIN , MS_BTN1, MS_WHLR, MS_WHLU, MS_WHLD, MS_WHLL, _______, _______,       MS_BTN2, _______, MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLR, MS_BTN1,   MAIN ,
-                                  _______, _______, MS_BTN2, MS_BTN1, _______,       _______, MS_BTN1, MS_BTN2, _______, _______,
+         MAIN , MS_BTN1, MS_WHLR, MS_WHLU, MS_WHLD, MS_WHLL, _______, _______,       MS_WHLD, MS_WHLU, MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLR, MS_BTN1,   MAIN ,
+                                  _______, _______, MS_BTN2, MS_BTN1, _______,       MS_BTN2, MS_BTN1, MS_BTN2, _______, _______,
 
        _______, _______, _______, _______, _______,                                                             _______, _______, _______, _______, _______
      ),
