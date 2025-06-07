@@ -439,3 +439,8 @@ void leader_end_user(void) {
         soft_reset_keyboard();
     }
 }
+
+void pointing_device_init_user(void) {
+    set_auto_mouse_layer(_MOUSE);
+    set_auto_mouse_enable(true);
+}
