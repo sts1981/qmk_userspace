@@ -440,7 +440,52 @@ void leader_end_user(void) {
     }
 }
 
+// NOTE: static means that the variable is scoped to this file
+static bool trackpad_scroll_mode = false;
+
 void pointing_device_init_user(void) {
+    // NOTE: auto-mouse layer is only activated when current layer is below mouse layer
     set_auto_mouse_layer(_MOUSE);
     set_auto_mouse_enable(true);
+}
+
+// based off example in QMK docs https://docs.qmk.fm/features/pointing_device#advanced-drag-scroll
+static float scroll_accumulated_h = 0;
+static float scroll_accumulated_v = 0;
+#define SCROLL_SCALE_H 8.0;
+#define SCROLL_SCALE_V 8.0;
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    if (trackpad_scroll_mode) {
+        if (abs(mouse_report.x) > abs(mouse_report.y)) {
+            // scroll horizontally
+            scroll_accumulated_h += (float)mouse_report.x / SCROLL_SCALE_H;
+            // Assign integer parts of accumulated scroll values to the mouse report
+            mouse_report.h = (int8_t)scroll_accumulated_h;
+            // Update accumulated scroll values by subtracting the integer parts
+            scroll_accumulated_h -= (int8_t)scroll_accumulated_h;
+        }
+        else {
+            // scroll vertically
+            scroll_accumulated_v += (float)mouse_report.y / SCROLL_SCALE_V;
+            mouse_report.v = (int8_t)scroll_accumulated_v;
+            scroll_accumulated_v -= (int8_t)scroll_accumulated_v;
+        }
+        // Clear the X and Y values of the mouse report
+        mouse_report.x = 0;
+        mouse_report.y = 0;
+    }
+    return mouse_report;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        case _NAV:
+            trackpad_scroll_mode = true;
+            // NOTE: Nav layer is above mouse layer, so don't need to toggle auto_mouse_enable
+            break;
+        default:
+            trackpad_scroll_mode = false;
+            break;
+    }
+    return state;
 }
