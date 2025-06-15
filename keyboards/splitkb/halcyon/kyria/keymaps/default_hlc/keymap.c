@@ -444,15 +444,15 @@ void leader_end_user(void) {
 static bool trackpad_scroll_mode = false;
 
 void pointing_device_init_user(void) {
-    //set_auto_mouse_layer(_MOUSE);
-    //set_auto_mouse_enable(true);
+    set_auto_mouse_layer(_MOUSE);
+    set_auto_mouse_enable(true);
 }
 
 // based off example in QMK docs https://docs.qmk.fm/features/pointing_device#advanced-drag-scroll
 static float scroll_accumulated_h = 0;
 static float scroll_accumulated_v = 0;
-#define SCROLL_SCALE_H 8.0;
-#define SCROLL_SCALE_V 8.0;
+#define SCROLL_SCALE_H 16.0;
+#define SCROLL_SCALE_V 16.0;
 report_mouse_t pointing_device_task_combined_user(report_mouse_t left_report, report_mouse_t right_report) {
     report_mouse_t mouse_report = pointing_device_combine_reports(left_report, right_report);
     if (trackpad_scroll_mode) {
@@ -480,6 +480,7 @@ report_mouse_t pointing_device_task_combined_user(report_mouse_t left_report, re
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
         case _NAV:
+            // NOTE: Nav is higher than mouse layer, so this works even when auto mouse mode is on
             trackpad_scroll_mode = true;
             break;
         default:
