@@ -441,7 +441,7 @@ void leader_end_user(void) {
 }
 
 // NOTE: static means that the variable is scoped to this file
-static bool trackpad_scroll_mode = false;
+bool trackpad_scroll_mode = true;
 
 void pointing_device_init_user(void) {
     //set_auto_mouse_layer(_MOUSE);
@@ -453,7 +453,7 @@ void pointing_device_init_user(void) {
 //static float scroll_accumulated_v = 0;
 //#define SCROLL_SCALE_H 8.0;
 //#define SCROLL_SCALE_V 8.0;
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+/*report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (trackpad_scroll_mode) {
         if (abs(mouse_report.x) > abs(mouse_report.y)) {
             // scroll horizontally
@@ -476,6 +476,15 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         mouse_report.y = 0;
     }
     return mouse_report;
+}*/
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    if (trackpad_scroll_mode) {
+        mouse_report.h = mouse_report.x;
+        mouse_report.v = mouse_report.y;
+        mouse_report.x = 0;
+        mouse_report.y = 0;
+    }
+    return mouse_report;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -484,7 +493,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             trackpad_scroll_mode = true;
             break;
         default:
-            trackpad_scroll_mode = false;
+            trackpad_scroll_mode = true;
             break;
     }
     return state;
