@@ -453,7 +453,8 @@ static float scroll_accumulated_h = 0;
 static float scroll_accumulated_v = 0;
 #define SCROLL_SCALE_H 8.0;
 #define SCROLL_SCALE_V 8.0;
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+report_mouse_t pointing_device_task_combined_user(report_mouse_t left_report, report_mouse_t right_report) {
+    report_mouse_t mouse_report = pointing_device_combine_reports(left_report, right_report);
     if (trackpad_scroll_mode) {
         if (abs(mouse_report.x) > abs(mouse_report.y)) {
             // scroll horizontally
