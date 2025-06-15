@@ -449,27 +449,25 @@ void pointing_device_init_user(void) {
 }
 
 // based off example in QMK docs https://docs.qmk.fm/features/pointing_device#advanced-drag-scroll
-//static float scroll_accumulated_h = 0;
-//static float scroll_accumulated_v = 0;
-//#define SCROLL_SCALE_H 8.0;
-//#define SCROLL_SCALE_V 8.0;
+static float scroll_accumulated_h = 0;
+static float scroll_accumulated_v = 0;
+#define SCROLL_SCALE_H 8.0;
+#define SCROLL_SCALE_V 8.0;
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (trackpad_scroll_mode) {
         if (abs(mouse_report.x) > abs(mouse_report.y)) {
             // scroll horizontally
-            //scroll_accumulated_h += (float)mouse_report.x / SCROLL_SCALE_H;
+            scroll_accumulated_h += (float)mouse_report.x / SCROLL_SCALE_H;
             // Assign integer parts of accumulated scroll values to the mouse report
-            //mouse_report.h = (int8_t)scroll_accumulated_h;
+            mouse_report.h = (int8_t)scroll_accumulated_h;
             // Update accumulated scroll values by subtracting the integer parts
-            //scroll_accumulated_h -= (int8_t)scroll_accumulated_h;
-            mouse_report.h = mouse_report.x;
+            scroll_accumulated_h -= (int8_t)scroll_accumulated_h;
         }
         else {
             // scroll vertically
-            //scroll_accumulated_v += (float)mouse_report.y / SCROLL_SCALE_V;
-            //mouse_report.v = (int8_t)scroll_accumulated_v;
-            //scroll_accumulated_v -= (int8_t)scroll_accumulated_v;
-            mouse_report.v = mouse_report.y;
+            scroll_accumulated_v += (float)mouse_report.y / SCROLL_SCALE_V;
+            mouse_report.v = (int8_t)scroll_accumulated_v;
+            scroll_accumulated_v -= (int8_t)scroll_accumulated_v;
         }
         // Clear the X and Y values of the mouse report
         mouse_report.x = 0;
