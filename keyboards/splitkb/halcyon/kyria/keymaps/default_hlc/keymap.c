@@ -444,9 +444,8 @@ void leader_end_user(void) {
 static bool trackpad_scroll_mode = false;
 
 void pointing_device_init_user(void) {
-    // NOTE: auto-mouse layer is only activated when current layer is below mouse layer
-    set_auto_mouse_layer(_MOUSE);
-    set_auto_mouse_enable(true);
+    //set_auto_mouse_layer(_MOUSE);
+    //set_auto_mouse_enable(true);
 }
 
 // based off example in QMK docs https://docs.qmk.fm/features/pointing_device#advanced-drag-scroll
@@ -481,7 +480,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
         case _NAV:
             trackpad_scroll_mode = true;
-            // NOTE: Nav layer is above mouse layer, so don't need to toggle auto_mouse_enable
             break;
         default:
             trackpad_scroll_mode = false;
