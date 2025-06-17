@@ -451,8 +451,8 @@ void pointing_device_init_user(void) {
 // based off example in QMK docs https://docs.qmk.fm/features/pointing_device#advanced-drag-scroll
 static float scroll_accumulated_h = 0;
 static float scroll_accumulated_v = 0;
-#define SCROLL_SCALE_H 16.0;
-#define SCROLL_SCALE_V 16.0;
+#define SCROLL_SCALE_H 24.0;
+#define SCROLL_SCALE_V 24.0;
 report_mouse_t pointing_device_task_combined_user(report_mouse_t left_report, report_mouse_t right_report) {
     report_mouse_t mouse_report = pointing_device_combine_reports(left_report, right_report);
     if (trackpad_scroll_mode) {
