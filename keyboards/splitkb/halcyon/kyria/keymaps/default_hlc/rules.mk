@@ -1,3 +1,5 @@
+SRC += display.c
+
 COMMAND_ENABLE = no
 CONSOLE_ENABLE = no
 MAGIC_ENABLE = no
