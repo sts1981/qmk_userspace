@@ -2,8 +2,8 @@
 #include "hlc_tft_display/hlc_tft_display.h"
 
 // Fonts mono2
-#include "graphics/fonts/Retron2000-27.qff.h"
-#include "graphics/fonts/Retron2000-underline-27.qff.h"
+#include "hlc_tft_display/graphics/fonts/Retron2000-27.qff.h"
+#include "hlc_tft_display/graphics/fonts/Retron2000-underline-27.qff.h"
 
 static const char *text_zero = "ZERO";
 static const char *text_adj = "ADJ";
