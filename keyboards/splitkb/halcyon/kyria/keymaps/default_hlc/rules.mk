@@ -1,4 +1,6 @@
-SRC += display.c
+ifdef HLC_TFT_DISPLAY
+  SRC += display.c
+endif
 
 COMMAND_ENABLE = no
 CONSOLE_ENABLE = no
