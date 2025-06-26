@@ -2,17 +2,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
-
-enum layers {
-    _QWERTY = 0,
-    _LMIRROR,
-    _RMIRROR,
-    _MOUSE,
-    _NAV,
-    _SWAY,
-    _ADJUST,
-    _SCROLL
-};
+#include "layers.h"
 
 enum tap_dance_codes {
     TD_EQLS,

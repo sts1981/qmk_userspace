@@ -1,5 +1,6 @@
 // Include the main display functions so we don't have to initialize the display again
 #include "hlc_tft_display/hlc_tft_display.h"
+#include "layers.h"
 
 // Fonts mono2
 #include "hlc_tft_display/graphics/fonts/Retron2000-27.qff.h"
