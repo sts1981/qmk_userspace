@@ -19,7 +19,7 @@ painter_device_t lcd_surface;
 static painter_font_handle_t Retron27;
 static painter_font_handle_t Retron27_underline;
 
-static last_layer = 0;
+static int last_layer = 0;
 
 // This function is ran on bootup of the keyboard
 bool module_post_init_user(void) {
