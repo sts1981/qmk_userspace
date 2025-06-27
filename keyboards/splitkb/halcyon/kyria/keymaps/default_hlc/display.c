@@ -36,6 +36,7 @@ painter_device_t lcd_surface;
 
 static painter_font_handle_t Retron27;
 static painter_font_handle_t Retron27_underline;
+static painter_image_handle_t layer_number;
 
 static int last_layer = 0;
 static uint8_t last_oneshot_mods;
@@ -107,6 +108,7 @@ bool display_module_housekeeping_task_user(bool second_display) {
             layer_number = qp_load_image_mem(gfx_undef);
             qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_UNDEF, HSV_BLACK);
         }
+        qp_close_image(layer_number);
         last_layer = layer;
     }
 
@@ -119,10 +121,10 @@ bool display_module_housekeeping_task_user(bool second_display) {
         else if (oneshot_mods & MOD_BIT(KC_RALT)) {
            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_ralt, HSV_ORANGE, HSV_BLACK);
         }
-        else if (oneshot_mods & MOD_BIT(KC_LCTRL)) {
+        else if (oneshot_mods & MOD_BIT(KC_LCTL)) {
            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_lctrl, HSV_ORANGE, HSV_BLACK);
         }
-        else if (oneshot_mods & MOD_BIT(KC_RCTRL)) {
+        else if (oneshot_mods & MOD_BIT(KC_RCTL)) {
            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_rctrl, HSV_ORANGE, HSV_BLACK);
         }
         else {
