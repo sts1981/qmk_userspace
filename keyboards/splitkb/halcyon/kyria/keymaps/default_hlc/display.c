@@ -25,7 +25,6 @@ static const char *text_lalt =  "LALT ";
 static const char *text_ralt =  "RALT ";
 static const char *text_lctrl = "LCTRL";
 static const char *text_rctrl = "RCTRL";
-static const char *text_blank = "     ";
 
 // copied from HSV_SCROLL_OFF
 #define HSV_DEFAULT_TEXT 202, 104, 77
@@ -128,7 +127,8 @@ bool display_module_housekeeping_task_user(bool second_display) {
            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_rctrl, HSV_ORANGE, HSV_BLACK);
         }
         else {
-           qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_blank, HSV_ORANGE, HSV_BLACK);
+            // clear text by overwriting with rectangle
+            qp_rect(lcd_surface, 5, text_y_pos, LCD_WIDTH, LCD_HEIGHT, HSV_OFF, true);
         }
         last_oneshot_mods = oneshot_mods;
     }
