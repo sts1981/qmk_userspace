@@ -5,9 +5,27 @@
 // Fonts mono2
 #include "hlc_tft_display/graphics/fonts/Retron2000-27.qff.h"
 #include "hlc_tft_display/graphics/fonts/Retron2000-underline-27.qff.h"
+// Numbers mono2
+#include "hlc_tft_display/graphics/numbers/0.qgf.h"
+#include "hlc_tft_display/graphics/numbers/1.qgf.h"
+#include "hlc_tft_display/graphics/numbers/2.qgf.h"
+#include "hlc_tft_display/graphics/numbers/3.qgf.h"
+#include "hlc_tft_display/graphics/numbers/4.qgf.h"
+#include "hlc_tft_display/graphics/numbers/5.qgf.h"
+#include "hlc_tft_display/graphics/numbers/6.qgf.h"
+#include "hlc_tft_display/graphics/numbers/7.qgf.h"
+#include "hlc_tft_display/graphics/numbers/8.qgf.h"
+#include "hlc_tft_display/graphics/numbers/9.qgf.h"
+#include "hlc_tft_display/graphics/numbers/undef.qgf.h"
 
-static const char *text_zero = "ZERO";
-static const char *text_adj = "ADJ";
+//static const char *text_zero = "ZERO";
+//static const char *text_adj = "ADJ";
+// NOTE: strings are padded to have consistent length
+static const char *text_lalt =  "LALT ";
+static const char *text_ralt =  "RALT ";
+static const char *text_lctrl = "LCTRL";
+static const char *text_rctrl = "RCTRL";
+static const char *text_blank = "     ";
 
 // copied from HSV_SCROLL_OFF
 #define HSV_DEFAULT_TEXT 202, 104, 77
@@ -20,6 +38,7 @@ static painter_font_handle_t Retron27;
 static painter_font_handle_t Retron27_underline;
 
 static int last_layer = 0;
+static uint8_t last_oneshot_mods;
 
 // This function is ran on bootup of the keyboard
 bool module_post_init_user(void) {
@@ -46,54 +65,71 @@ bool display_module_housekeeping_task_user(bool second_display) {
     int layer = get_highest_layer(layer_state);
     if (layer != last_layer || is_first_run) {
         switch (layer) {
-        case _QWERTY:
-            qp_drawtext_recolor(lcd_surface, 5, 5, Retron27, text_zero, HSV_DEFAULT_TEXT, HSV_BLACK);
+        /* case _QWERTY: */
+        /*     qp_drawtext_recolor(lcd_surface, 5, 5, Retron27, text_zero, HSV_DEFAULT_TEXT, HSV_BLACK); */
+        /*     break; */
+        /* case _ADJUST: */
+        /*     qp_drawtext_recolor(lcd_surface, 5, 5, Retron27, text_adj, HSV_DEFAULT_TEXT, HSV_BLACK); */
+        /*     break; */
+        case 0:
+            layer_number = qp_load_image_mem(gfx_0);
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_0, HSV_BLACK);
             break;
-        case _ADJUST:
-            qp_drawtext_recolor(lcd_surface, 5, 5, Retron27, text_adj, HSV_DEFAULT_TEXT, HSV_BLACK);
+        case 1:
+            layer_number = qp_load_image_mem(gfx_1);
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_1, HSV_BLACK);
             break;
+        case 2:
+            layer_number = qp_load_image_mem(gfx_2);
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_2, HSV_BLACK);
+            break;
+        case 3:
+            layer_number = qp_load_image_mem(gfx_3);
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_3, HSV_BLACK);
+            break;
+        case 4:
+            layer_number = qp_load_image_mem(gfx_4);
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_4, HSV_BLACK);
+            break;
+        case 5:
+            layer_number = qp_load_image_mem(gfx_5);
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_5, HSV_BLACK);
+            break;
+        case 6:
+            layer_number = qp_load_image_mem(gfx_6);
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_6, HSV_BLACK);
+            break;
+        case 7:
+            layer_number = qp_load_image_mem(gfx_7);
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_7, HSV_BLACK);
+            break;
+        default:
+            layer_number = qp_load_image_mem(gfx_undef);
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_UNDEF, HSV_BLACK);
         }
         last_layer = layer;
     }
 
-    // Create checks to see if the displays are set. We don't need to keep updating the display with the same image so this will save some CPU time.
-    /*static bool display_set = false;
-    static bool second_display_set = false;
-
-    // When the display isn't set, do the following
-    if (!display_set) {
-        // If it's the main display
-        if (!second_display) {
-            // Create text to write
-            static const char *text = "This is a user display!";
-
-            // Draw text on top left corner
-            qp_drawtext_recolor(lcd_surface, 0, 0, thintel, text, HSV_WHITE, HSV_BLACK);
-
-            // Make sure to not run this again.
-            display_set = true;
-        // If it's the secundairy display
-        } else {
-            // Create text to write
-            static const char *text = "This is a second user display!";
-
-            // Read width from text
-            int16_t width = qp_textwidth(thintel, text);
-
-            // Draw text on bottom right corner
-            qp_drawtext_recolor(lcd_surface, (LCD_WIDTH - width), (LCD_HEIGHT - thintel->line_height), thintel, text, HSV_WHITE, HSV_BLACK);
-
-            // Make sure to not run this again.
-            display_set = true;
-            second_display_set = true;
+    uint8_t oneshot_mods = get_oneshot_mods() | get_oneshot_locked_mods();
+    if (oneshot_mods != last_oneshot_mods || is_first_run) {
+        uint16_t text_y_pos = LCD_HEIGHT - Retron27->line_height - 5;
+        if (oneshot_mods & MOD_BIT(KC_LALT)) {
+           qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_lalt, HSV_ORANGE, HSV_BLACK);
         }
+        else if (oneshot_mods & MOD_BIT(KC_RALT)) {
+           qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_ralt, HSV_ORANGE, HSV_BLACK);
+        }
+        else if (oneshot_mods & MOD_BIT(KC_LCTRL)) {
+           qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_lctrl, HSV_ORANGE, HSV_BLACK);
+        }
+        else if (oneshot_mods & MOD_BIT(KC_RCTRL)) {
+           qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_rctrl, HSV_ORANGE, HSV_BLACK);
+        }
+        else {
+           qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_blank, HSV_ORANGE, HSV_BLACK);
+        }
+        last_oneshot_mods = oneshot_mods;
     }
-
-    // Make sure that the second display loads correctly, sometimes it takes a little while for the keyboard to know it has a second display.
-    // So we reset the state and make it run again until the secondary display is drawn correctly
-    if(second_display && !second_display_set) {
-        display_set = false;
-    }*/
 
     // Move surface to lcd, this actually writes the content to the physical display
     qp_surface_draw(lcd_surface, lcd, 0, 0, 0);
