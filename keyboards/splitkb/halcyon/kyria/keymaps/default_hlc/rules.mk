@@ -1,5 +1,13 @@
 ifdef HLC_TFT_DISPLAY
-  SRC += display.c
+  SRC += display.c \
+         graphics/arrow-all.qgf.c \
+         graphics/keyboard.qgf.c \
+         graphics/monitor.qgf.c \
+         graphics/mouse.qgf.c \
+         graphics/numeric.qgf.c \
+         graphics/script-outline.qgf.c \
+         graphics/symbol.qgf.c \
+         graphics/tools.qgf.c \
 endif
 
 COMMAND_ENABLE = no

@@ -5,27 +5,36 @@
 // Fonts mono2
 #include "hlc_tft_display/graphics/fonts/Retron2000-27.qff.h"
 #include "hlc_tft_display/graphics/fonts/Retron2000-underline-27.qff.h"
-// Numbers mono2
-#include "hlc_tft_display/graphics/numbers/0.qgf.h"
-#include "hlc_tft_display/graphics/numbers/1.qgf.h"
-#include "hlc_tft_display/graphics/numbers/2.qgf.h"
-#include "hlc_tft_display/graphics/numbers/3.qgf.h"
-#include "hlc_tft_display/graphics/numbers/4.qgf.h"
-#include "hlc_tft_display/graphics/numbers/5.qgf.h"
-#include "hlc_tft_display/graphics/numbers/6.qgf.h"
-#include "hlc_tft_display/graphics/numbers/7.qgf.h"
-#include "hlc_tft_display/graphics/numbers/8.qgf.h"
-#include "hlc_tft_display/graphics/numbers/9.qgf.h"
-#include "hlc_tft_display/graphics/numbers/undef.qgf.h"
+// images
+#include "graphics/arrow-all.qgf.h"
+#include "graphics/keyboard.qgf.h"
+#include "graphics/keyboard.qgf.h"
+#include "graphics/monitor.qgf.h"
+#include "graphics/mouse.qgf.h"
+#include "graphics/numeric.qgf.h"
+#include "graphics/script-outline.qgf.h"
+#include "graphics/symbol.qgf.h"
+#include "graphics/tools.qgf.h"
 
 //static const char *text_zero = "ZERO";
 //static const char *text_adj = "ADJ";
-// NOTE: strings are padded to have consistent length
-static const char *text_lalt =  "LALT ";
-static const char *text_ralt =  "RALT ";
+static const char *text_lalt =  "LALT";
+static const char *text_ralt =  "RALT";
 static const char *text_lctrl = "LCTRL";
 static const char *text_rctrl = "RCTRL";
+// NOTE: strings are padded to ensure previous value is overwritten
+static const char *text_0 = "0 ";
+static const char *text_1 = "1 ";
+static const char *text_2 = "2 ";
+static const char *text_3 = "3 ";
+static const char *text_4 = "4 ";
+static const char *text_5 = "5 ";
+static const char *text_6 = "6 ";
+static const char *text_7 = "7 ";
+static const char *text_undef = "? ";
 
+// copied from HSV_LAYER_0
+#define HSV_DEFAULT_IMAGE 0, 0, 160
 // copied from HSV_SCROLL_OFF
 #define HSV_DEFAULT_TEXT 202, 104, 77
 
@@ -35,7 +44,7 @@ painter_device_t lcd_surface;
 
 static painter_font_handle_t Retron27;
 static painter_font_handle_t Retron27_underline;
-static painter_image_handle_t layer_number;
+static painter_image_handle_t layer_image;
 
 static int last_layer = 0;
 static uint8_t last_oneshot_mods;
@@ -64,50 +73,67 @@ bool display_module_housekeeping_task_user(bool second_display) {
 
     int layer = get_highest_layer(layer_state);
     if (layer != last_layer || is_first_run) {
+        bool no_image = false;
         switch (layer) {
-        /* case _QWERTY: */
-        /*     qp_drawtext_recolor(lcd_surface, 5, 5, Retron27, text_zero, HSV_DEFAULT_TEXT, HSV_BLACK); */
-        /*     break; */
-        /* case _ADJUST: */
-        /*     qp_drawtext_recolor(lcd_surface, 5, 5, Retron27, text_adj, HSV_DEFAULT_TEXT, HSV_BLACK); */
-        /*     break; */
-        case 0:
-            layer_number = qp_load_image_mem(gfx_0);
-            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_0, HSV_BLACK);
+        case _QWERTY:
+            layer_image = qp_load_image_mem(gfx_keyboard);
             break;
-        case 1:
-            layer_number = qp_load_image_mem(gfx_1);
-            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_1, HSV_BLACK);
+        case _LMIRROR:
+            layer_image = qp_load_image_mem(gfx_symbol);
             break;
-        case 2:
-            layer_number = qp_load_image_mem(gfx_2);
-            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_2, HSV_BLACK);
+        case _RMIRROR:
+            layer_image = qp_load_image_mem(gfx_numeric);
             break;
-        case 3:
-            layer_number = qp_load_image_mem(gfx_3);
-            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_3, HSV_BLACK);
+        case _MOUSE:
+            layer_image = qp_load_image_mem(gfx_mouse);
             break;
-        case 4:
-            layer_number = qp_load_image_mem(gfx_4);
-            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_4, HSV_BLACK);
+        case _NAV:
+            layer_image = qp_load_image_mem(gfx_arrow_all);
             break;
-        case 5:
-            layer_number = qp_load_image_mem(gfx_5);
-            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_5, HSV_BLACK);
+        case _SWAY:
+            layer_image = qp_load_image_mem(gfx_monitor);
             break;
-        case 6:
-            layer_number = qp_load_image_mem(gfx_6);
-            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_6, HSV_BLACK);
-            break;
-        case 7:
-            layer_number = qp_load_image_mem(gfx_7);
-            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_7, HSV_BLACK);
+        case _ADJUST:
+            layer_image = qp_load_image_mem(gfx_tools);
             break;
         default:
-            layer_number = qp_load_image_mem(gfx_undef);
-            qp_drawimage_recolor(lcd_surface, 5, 5, layer_number, HSV_LAYER_UNDEF, HSV_BLACK);
+            no_image = true;
         }
-        qp_close_image(layer_number);
+        if (!no_image) {
+            qp_drawimage_recolor(lcd_surface, 5, 5, layer_image, HSV_DEFAULT_IMAGE, HSV_BLACK);
+            qp_close_image(layer_image);
+        }
+        // write layer number as well
+        uint16_t text_y_pos = no_image ? 5 : 5 + layer_image->height + 5;
+        switch (layer) {
+        case 0:
+            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_0, HSV_LAYER_0, HSV_BLACK);
+            break;
+        case 1:
+            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_1, HSV_LAYER_1, HSV_BLACK);
+            break;
+        case 2:
+            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_2, HSV_LAYER_2, HSV_BLACK);
+            break;
+        case 3:
+            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_3, HSV_LAYER_3, HSV_BLACK);
+            break;
+        case 4:
+            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_4, HSV_LAYER_4, HSV_BLACK);
+            break;
+        case 5:
+            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_5, HSV_LAYER_5, HSV_BLACK);
+            break;
+        case 6:
+            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_6, HSV_LAYER_6, HSV_BLACK);
+            break;
+        case 7:
+            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_7, HSV_LAYER_7, HSV_BLACK);
+            break;
+        default:
+            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_undef, HSV_LAYER_UNDEF, HSV_BLACK);
+        }
+
         last_layer = layer;
     }
 
