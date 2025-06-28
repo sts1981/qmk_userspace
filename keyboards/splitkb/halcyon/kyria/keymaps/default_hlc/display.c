@@ -96,6 +96,9 @@ bool display_module_housekeeping_task_user(bool second_display) {
         case _ADJUST:
             layer_image = qp_load_image_mem(gfx_tools);
             break;
+        case _SCROLL:
+            layer_image = qp_load_image_mem(gfx_script_outline);
+            break;
         default:
             no_image = true;
         }
