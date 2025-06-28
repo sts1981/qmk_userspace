@@ -7,7 +7,7 @@ ifdef HLC_TFT_DISPLAY
          graphics/numeric.qgf.c \
          graphics/script-outline.qgf.c \
          graphics/symbol.qgf.c \
-         graphics/tools.qgf.c \
+         graphics/tools.qgf.c
 endif
 
 COMMAND_ENABLE = no
