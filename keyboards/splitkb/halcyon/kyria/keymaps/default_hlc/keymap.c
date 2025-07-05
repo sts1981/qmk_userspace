@@ -430,8 +430,8 @@ void leader_end_user(void) {
     }
 }
 
-// NOTE: static means that the variable is scoped to this file
-static bool trackpad_scroll_mode = false;
+// NOTE: not static, display.c accesses this variable too
+bool trackpad_scroll_mode = false;
 
 void pointing_device_init_user(void) {
     set_auto_mouse_layer(_MOUSE);

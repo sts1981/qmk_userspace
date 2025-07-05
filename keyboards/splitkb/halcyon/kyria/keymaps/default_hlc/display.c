@@ -22,6 +22,7 @@ static const char *text_lalt =  "LALT";
 static const char *text_ralt =  "RALT";
 static const char *text_lctrl = "LCTRL";
 static const char *text_rctrl = "RCTRL";
+static const char *text_wheel = "WHEEL";
 // NOTE: strings are padded to ensure previous value is overwritten
 static const char *text_0 = "0 ";
 static const char *text_1 = "1 ";
@@ -48,6 +49,9 @@ static painter_image_handle_t layer_image;
 
 static int last_layer = 0;
 static uint8_t last_oneshot_mods;
+
+extern bool trackpad_scroll_mode;
+static bool last_trackpad_scroll_mode = false;
 
 // This function is ran on bootup of the keyboard
 bool module_post_init_user(void) {
@@ -138,6 +142,17 @@ bool display_module_housekeeping_task_user(bool second_display) {
         }
 
         last_layer = layer;
+    }
+
+    if (trackpad_scroll_mode != last_trackpad_scroll_mode) {
+        uint16_t text_y_pos = LCD_HEIGHT - 2*(Retron27->line_height + 5);
+        if (trackpad_scroll_mode) {
+           qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_wheel, HSV_DEFAULT_TEXT, HSV_BLACK);
+        }
+        else {
+            qp_rect(lcd_surface, 5, text_y_pos, LCD_WIDTH, LCD_HEIGHT, HSV_OFF, true);
+        }
+        last_trackpad_scroll_mode = trackpad_scroll_mode;
     }
 
     uint8_t oneshot_mods = get_oneshot_mods() | get_oneshot_locked_mods();
