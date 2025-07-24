@@ -30,3 +30,9 @@
 #define AUTO_MOUSE_TIME 200
 
 #define CAPS_WORD_INVERT_ON_SHIFT
+
+// this might fix keyboard not connecting on computer boot
+// https://github.com/qmk/qmk_firmware/issues/21264
+// RP2040 is ChibiOS based, so SPLIT_USB_DETECT is set by default
+// NOTE: changing this needs to be flashed on both halves (https://github.com/qmk/qmk_firmware/issues/19593)
+#define SPLIT_WATCHDOG_ENABLE
