@@ -18,6 +18,10 @@ enum tap_dance_codes {
     TD_SCROLL_PGDN
 };
 
+enum keycodes {
+    KCC_TRACKPAD_SCROLL = SAFE_RANGE
+};
+
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
 
@@ -336,6 +340,7 @@ const uint16_t PROGMEM combo_light[] = { MN_6, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_lleader[] = { MN_Z, KC_B, COMBO_END};
 const uint16_t PROGMEM combo_rleader[] = { MN_SLSH, KC_N, COMBO_END};
 const uint16_t PROGMEM combo_scroll[] = { MN_4, MN_7, COMBO_END};
+const uint16_t PROGMEM combo_trackpad_scroll[] = { KC_H, KC_J, COMBO_END };
 
 combo_t key_combos[] = {
     COMBO(combo_lctl, KC_LCTL),
@@ -350,7 +355,8 @@ combo_t key_combos[] = {
     COMBO(combo_light, RM_TOGG),
     COMBO(combo_lleader, QK_LEAD),
     COMBO(combo_rleader, QK_LEAD),
-    COMBO(combo_scroll, TO(_SCROLL))
+    COMBO(combo_scroll, TO(_SCROLL)),
+    COMBO(combo_trackpad_scroll, KCC_TRACKPAD_SCROLL)
 };
 
 typedef struct {
@@ -432,6 +438,7 @@ void leader_end_user(void) {
 
 // NOTE: not static, display.c accesses this variable too
 bool trackpad_scroll_mode = false;
+static bool trackpad_scroll_toggle = false;
 
 void pointing_device_init_user(void) {
     set_auto_mouse_layer(_MOUSE);
@@ -474,8 +481,22 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             trackpad_scroll_mode = true;
             break;
         default:
-            trackpad_scroll_mode = false;
+            trackpad_scroll_mode = trackpad_scroll_toggle;
             break;
     }
     return state;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case KCC_TRACKPAD_SCROLL:
+            // toggle trackpad scroll mode when key is pressed
+            if (record->event.pressed) {
+                trackpad_scroll_toggle = !trackpad_scroll_toggle;
+                trackpad_scroll_mode = trackpad_scroll_toggle;
+            }
+            return false; // skip further processing
+        default:
+            return true; // process keycode normally
+    }
 }
