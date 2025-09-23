@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Navigation, other frequently used keys
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * | BkSpc  | Del  | LCtrl| LAlt | BkSpc|PrtSc |                              |CpsWrd|CpsWrd| RAlt | RCtrl| Del  |  BkSpc |
+ * | BkSpc  | Del  | LCtrl| LAlt |      |PrtSc |                              | Ins  |CpsWrd| RAlt | RCtrl| Del  |  BkSpc |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | MAIN   |AlCtTb|   →  |  ↑   |   ↓  |  ←   |                              |   ←  |  ↓   |   ↑  |   →  |AlCtTb|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -203,7 +203,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------'                                              `-----------------------------------'
  */
     [_NAV] = LAYOUT_split_3x6_5_hlc(
-      KC_BSPC, KC_DEL ,OSM_LCTL,OSM_LALT, KC_BSPC, KC_PSCR,                                     CW_TOGG, CW_TOGG,OSM_RALT,OSM_RCTL, KC_DEL , KC_BSPC,
+      KC_BSPC, KC_DEL ,OSM_LCTL,OSM_LALT, _______, KC_PSCR,                                     KC_INS , CW_TOGG,OSM_RALT,OSM_RCTL, KC_DEL , KC_BSPC,
         MAIN , WIN_SEL, KC_RGHT, KC_UP  , KC_DOWN, KC_LEFT,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, WIN_SEL, _______,
       _______, WIN_NXT,  KC_END, KC_PGUP, KC_PGDN, KC_HOME, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, WIN_NXT, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -211,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
  /*
-  * Sway: window switching/navigation, should be reached with Meta modifier on
+  * Sway: window switching/navigation
   *
   * ,-------------------------------------------.                              ,-------------------------------------------.
   * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
