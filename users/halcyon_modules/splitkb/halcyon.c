@@ -6,6 +6,7 @@
 #include "transactions.h"
 #include "split_util.h"
 #include "_wait.h"
+#include "pointing_device.h"
 
 __attribute__((weak)) void module_suspend_power_down_kb(void);
 __attribute__((weak)) void module_suspend_wakeup_init_kb(void);
@@ -83,6 +84,11 @@ void suspend_wakeup_init_kb(void) {
 void keyboard_post_init_kb(void) {
     // Register module sync split transaction
     transaction_register_rpc(MODULE_SYNC, module_sync_slave_handler);
+
+    // If master module is not a cirque trackpad, set pointing device status to success
+    if(module != hlc_cirque_trackpad) {
+        pointing_device_set_status(POINTING_DEVICE_STATUS_SUCCESS);
+    }
 
     // Do any post init for modules
     module_post_init_kb();
