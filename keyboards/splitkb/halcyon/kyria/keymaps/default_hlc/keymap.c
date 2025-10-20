@@ -19,7 +19,9 @@ enum tap_dance_codes {
 };
 
 enum keycodes {
-    KCC_TRACKPAD_SCROLL = SAFE_RANGE
+    KCC_TRACKPAD_SCROLL = SAFE_RANGE,
+    KCC_AUTO_MOUSE_OFF,
+    KCC_AUTO_MOUSE_TOGGLE
 };
 
 // Aliases for readability
@@ -33,6 +35,9 @@ enum keycodes {
 //#define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
 //#define CTL_MINS MT(MOD_RCTL, KC_MINUS)
 //#define ALT_ENT  MT(MOD_LALT, KC_ENT)
+
+#define MK_AMO KCC_AUTO_MOUSE_OFF
+#define MK_AMT KCC_AUTO_MOUSE_TOGGLE
 
 #define OSM_LALT OSM(MOD_LALT)
 #define OSM_LCTL OSM(MOD_LCTL)
@@ -169,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
   * |  MAIN  |Click |WheelR|WheelU|WheelD|WheelL|      |      |  |WheelD|WheelU|WheelL|WheelD|WheelU|WheelR|Click | MAIN   |
   * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-  *                        |      |      |RClick|Click |      |  |RClick| Click|RClick|      |      |
+  *                        |AMS_OF|AMS_TG|RClick|Click |      |  |RClick| Click|RClick|AMS_TG|AMS_OF|
   *                        |      |      |      |      |      |  |      |      |      |      |      |
   *                        `----------------------------------'  `----------------------------------'
   * ,-----------------------------------.                                              ,-----------------------------------.
@@ -180,7 +185,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F11,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 ,  KC_F5 ,                                            KC_F6 ,  KC_F7 ,  KC_F8 ,  KC_F9 ,  KC_F10,  KC_F12,
        MSE_OFF, _______, MS_RGHT,  MS_UP , MS_DOWN, MS_LEFT,                                           MS_LEFT, MS_DOWN,  MS_UP , MS_RGHT, _______, MSE_OFF,
          MAIN , MS_BTN1, MS_WHLR, MS_WHLU, MS_WHLD, MS_WHLL, _______, _______,       MS_WHLD, MS_WHLU, MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLR, MS_BTN1,   MAIN ,
-                                  _______, _______, MS_BTN2, MS_BTN1, _______,       MS_BTN2, MS_BTN1, MS_BTN2, _______, _______,
+                                  MK_AMO , MK_AMT , MS_BTN2, MS_BTN1, _______,       MS_BTN2, MS_BTN1, MS_BTN2, MK_AMT , MK_AMO ,
 
        _______, _______, _______, _______, _______,                                                             _______, _______, _______, _______, _______
      ),
@@ -494,6 +499,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 trackpad_scroll_toggle = !trackpad_scroll_toggle;
                 trackpad_scroll_mode = trackpad_scroll_toggle;
+            }
+            return false; // skip further processing
+        case KCC_AUTO_MOUSE_OFF:
+            if (record->event.pressed) {
+                auto_mouse_layer_off();
+                set_auto_mouse_enable(false);
+            }
+            return false; // skip further processing
+        case KCC_AUTO_MOUSE_TOGGLE:
+            if (record->event.pressed) {
+                bool current_state = get_auto_mouse_enable();
+                if (current_state) {
+                    auto_mouse_layer_off();
+                    set_auto_mouse_enable(false);
+                }
+                else {
+                    set_auto_mouse_enable(true);
+                }
             }
             return false; // skip further processing
         default:
