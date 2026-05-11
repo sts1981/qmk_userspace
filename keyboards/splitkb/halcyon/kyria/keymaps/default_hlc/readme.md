@@ -1,3 +1,29 @@
+Last flashed (LH): ead88f0
+Last flashed (RH): ead88f0
+
+# STS Rev 4 keymap
+- based off Rev 3
+- added keys to toggle auto-mouse layer
+
+# STS Rev 3 keymap
+- merged upstream changes
+- added custom display code & icons
+
+## Rev3b
+- merged upstream change to use QMK firmware repo instead of splitkb vial fork.
+- added combo key to toggle trackpad scrolling
+- added Insert key to Nav layer
+
+## Rev3c
+- updated to QMK 0.30.5 and merged latest changes from splitkb repo
+
+# STS Rev 2 keymap
+
+Compared to the rev 1 keymap, this layout auto-enables the mouse layer when
+using the trackpad, and disables the scroll ring feature on the trackpad. This
+makes mouse movement more reliable, and makes it easier to right-click and/or
+scroll when using the trackpad.
+
 # STS Rev 1 keymap
 
 ## Main layer (QWERTY)
@@ -52,11 +78,6 @@ There is a Scroll layer.
 
 Leader keys are used to enter the Adjust layer (which includes keys for flashing), and to reboot the keyboard (this is a soft reset, without flashing).
 
-### Bootmagic
-Bootmagic should be turned on by default in the code.
-The bootmagic keys are not explicitly configured.
-Based on the docs/discord, I believe they should be the top left key on the left half and the top right key on the right half.
-
 ## Display
 
 The default Kyria display code is used.
@@ -64,6 +85,15 @@ The default Kyria display code is used.
 ## Trackpad
 
 The defalt settings are used.
+
+# QMK notes
+
+# Things that require a particular half to be flashed
+
+Enabling/disabling trackpad scroll - need to flash half with trackpad
+
+## Bootmagic
+Discord suggests bootmagic is disabled for Halcyon-series keyboards. 
 
 # Halcyon Kyria's Default Keymap (old)
 
