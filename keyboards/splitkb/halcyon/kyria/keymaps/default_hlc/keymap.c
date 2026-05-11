@@ -341,6 +341,7 @@ const uint16_t PROGMEM combo_zoom_out[] = { KC_M, MN_SLSH, COMBO_END};
 const uint16_t PROGMEM combo_lmouse[] = { MN_ENT, MN_3, COMBO_END};
 const uint16_t PROGMEM combo_rmouse[] = { MN_SPC, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_lnumpad[] = { MN_4, MN_5, COMBO_END};
+const uint16_t PROGMEM combo_rsymbol[] = { MN_6, MN_7, COMBO_END};
 const uint16_t PROGMEM combo_light[] = { MN_6, MN_8, COMBO_END};
 const uint16_t PROGMEM combo_lleader[] = { MN_Z, KC_B, COMBO_END};
 const uint16_t PROGMEM combo_rleader[] = { MN_SLSH, KC_N, COMBO_END};
@@ -357,6 +358,7 @@ combo_t key_combos[] = {
     COMBO(combo_lmouse, TT(_MOUSE)),
     COMBO(combo_rmouse, TT(_MOUSE)),
     COMBO(combo_lnumpad, TT(_RMIRROR)),
+    COMBO(combo_rsymbol, TT(_LMIRROR)),
     COMBO(combo_light, RM_TOGG),
     COMBO(combo_lleader, QK_LEAD),
     COMBO(combo_rleader, QK_LEAD),

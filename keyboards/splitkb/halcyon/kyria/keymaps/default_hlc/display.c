@@ -150,7 +150,7 @@ bool display_module_housekeeping_task_user(bool second_display) {
            qp_drawtext_recolor(lcd_surface, 5, text_y_pos, Retron27, text_wheel, HSV_DEFAULT_TEXT, HSV_BLACK);
         }
         else {
-            qp_rect(lcd_surface, 5, text_y_pos, LCD_WIDTH, LCD_HEIGHT, HSV_OFF, true);
+            qp_rect(lcd_surface, 5, text_y_pos, LCD_WIDTH, text_y_pos + Retron27->line_height + 5, HSV_OFF, true);
         }
         last_trackpad_scroll_mode = trackpad_scroll_mode;
     }
