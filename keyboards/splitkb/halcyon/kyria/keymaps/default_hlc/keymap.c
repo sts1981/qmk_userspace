@@ -449,7 +449,7 @@ static bool trackpad_scroll_toggle = false;
 
 void pointing_device_init_user(void) {
     set_auto_mouse_layer(_MOUSE);
-    set_auto_mouse_enable(true);
+    //set_auto_mouse_enable(true);
 }
 
 // based off example in QMK docs https://docs.qmk.fm/features/pointing_device#advanced-drag-scroll
