@@ -481,6 +481,12 @@ report_mouse_t pointing_device_task_combined_user(report_mouse_t left_report, re
     return mouse_report;
 }
 
+// this replaces default Cirque activation function
+// identical to default function, except it ignores is_touch_down
+bool auto_mouse_activation(report_mouse_t mouse_report) {
+    return mouse_report.x != 0 || mouse_report.y != 0 || mouse_report.h != 0 || mouse_report.v != 0 || mouse_report.buttons;
+}
+
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
         case _NAV:
